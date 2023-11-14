@@ -5,6 +5,9 @@ import { signIn } from 'next-auth/react';
 // TODO: test signin/signout of different providers
 // create custom button component for signIn providers
 
+// test facebook login
+// add providers for email and apple login
+
 const SignUp = () => {
 
   const handleClick = (e) => {
