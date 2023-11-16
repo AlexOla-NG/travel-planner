@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "mongodb": "^6.2.0",
     "next": "14.0.1",
     "next-auth": "^4.24.5",
     "nodemailer": "^6.9.7",
