@@ -21,13 +21,13 @@ export const authOptions = {
       clientSecret: process.env.FACEBOOK_SECRET,
     }),
   ],
-  database: process.env.DB_URL,
-  session: {
-    jwt: true,
-  },
-  jwt: {
-    secret: process.env.JWT_SECRET,
-  }
+  database: process.env.MONGO_DB_URI,
+  // session: {
+  //   jwt: true,
+  // },
+  // jwt: {
+  //   secret: process.env.JWT_SECRET,
+  // }
 }
 
 export default NextAuth(authOptions)
