@@ -1,17 +1,22 @@
 import NextAuth from "next-auth"
-import GithubProvider from "next-auth/providers/github"
 import AppleProvider from "next-auth/providers/apple"
 import EmailProvider from "next-auth/providers/email";
 import FacebookProvider from "next-auth/providers/facebook"
 import GoogleProvider from "next-auth/providers/google"
+import clientPromise from "@/libs/clientPromise";
+import { MongoDBAdapter } from "@auth/mongodb-adapter";
+
+// TODO: stopped here
+// fix email provider error: username & password not accepted
 
 export const authOptions = {
+  adapter: MongoDBAdapter(clientPromise),
   // Configure one or more authentication providers
   providers: [
-    // GithubProvider({
-    //   clientId: process.env.GITHUB_ID,
-    //   clientSecret: process.env.GITHUB_SECRET,
-    // }),
+    EmailProvider({
+      server: process.env.EMAIL_SERVER,
+      from: process.env.EMAIL_FROM
+    }),
     GoogleProvider({
       clientId: process.env.GOOGLE_ID,
       clientSecret: process.env.GOOGLE_SECRET,
