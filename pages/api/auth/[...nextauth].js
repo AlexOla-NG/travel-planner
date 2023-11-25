@@ -7,7 +7,7 @@ import clientPromise from "@/libs/clientPromise";
 import { MongoDBAdapter } from "@auth/mongodb-adapter";
 
 // TODO: stopped here
-// fix email provider error: username & password not accepted
+// configure mailjet
 
 export const authOptions = {
   adapter: MongoDBAdapter(clientPromise),
