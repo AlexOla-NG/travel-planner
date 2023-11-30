@@ -3,18 +3,25 @@ import AppleProvider from "next-auth/providers/apple"
 import EmailProvider from "next-auth/providers/email";
 import FacebookProvider from "next-auth/providers/facebook"
 import GoogleProvider from "next-auth/providers/google"
-import clientPromise from "@/libs/clientPromise";
+import clientPromise from "@/src/libs/clientPromise";
 import { MongoDBAdapter } from "@auth/mongodb-adapter";
 
 // TODO: stopped here
-// configure mailjet
+// test if provider login works (email, google, facebook)
 
 export const authOptions = {
   adapter: MongoDBAdapter(clientPromise),
   // Configure one or more authentication providers
   providers: [
     EmailProvider({
-      server: process.env.EMAIL_SERVER,
+      server: {
+        host: process.env.EMAIL_SERVER_HOST,
+        port: process.env.EMAIL_SERVER_PORT,
+        auth: {
+          user: process.env.EMAIL_SERVER_USER,
+          pass: process.env.EMAIL_SERVER_PASSWORD
+        }
+      },
       from: process.env.EMAIL_FROM
     }),
     GoogleProvider({
