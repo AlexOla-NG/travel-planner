@@ -7,7 +7,8 @@ import clientPromise from "@/src/libs/clientPromise";
 import { MongoDBAdapter } from "@auth/mongodb-adapter";
 
 // TODO: stopped here
-// test if provider login works (email, google, facebook)
+// session data is not being passed to callback, please fix
+// pick 3 colors for app (primary, secondary & accent)
 
 export const authOptions = {
   adapter: MongoDBAdapter(clientPromise),
@@ -28,18 +29,19 @@ export const authOptions = {
       clientId: process.env.GOOGLE_ID,
       clientSecret: process.env.GOOGLE_SECRET,
     }),
+    // facebook provider is broken, please fix
     FacebookProvider({
       clientId: process.env.FACEBOOK_ID,
       clientSecret: process.env.FACEBOOK_SECRET,
     }),
   ],
   database: process.env.MONGO_DB_URI,
-  // session: {
-  //   jwt: true,
-  // },
-  // jwt: {
-  //   secret: process.env.JWT_SECRET,
-  // }
+  session: {
+    strategy: "jwt",
+
+    // Seconds - How long until an idle session expires and is no longer valid.
+    maxAge: 30 * 24 * 60 * 60, // 30 days
+  },
 }
 
 export default NextAuth(authOptions)
