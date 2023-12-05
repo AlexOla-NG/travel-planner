@@ -1,4 +1,4 @@
-import SignUp from '@/src/components/authentication/SignUp'
+import SignUp from '@/components/authentication/SignUp'
 import React from 'react'
 
 const index = () => {

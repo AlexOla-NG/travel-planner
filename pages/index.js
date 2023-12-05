@@ -7,7 +7,7 @@ import { useSession } from 'next-auth/react'
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
-  const { session , status} = useSession()
+  const { data: session , status} = useSession()
 
   console.log('session, status here:', session, status);
   return (

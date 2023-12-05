@@ -2,10 +2,9 @@ import Link from 'next/link';
 import React from 'react'
 import { signIn } from 'next-auth/react';
 
-// TODO: test signin/signout of different providers
-// create custom button component for signIn providers
-
-// add providers for email and apple login
+// TODO: stopped here
+// create models, middleware for api
+// api middleware should include check for authentication to prevent unauthorized api access
 
 const SignUp = () => {
 
