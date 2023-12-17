@@ -14,7 +14,9 @@ const userSchema = new Schema(
 			required: [true, "Please add an email"],
 			unique: true,
 		},
+		phoneNumber: { type: String, required: [true, "Please add a phone number"], },
 		password: { type: String, required: [true, "Please add a password"] },
+		contacts: [{ type: Schema.Types.ObjectId, ref: 'Contact' }],
 		createdAt: { type: Date, default: Date.now },
 	},
 	{ toJSON: { virtuals: true }, toObject: { virtuals: true } }
