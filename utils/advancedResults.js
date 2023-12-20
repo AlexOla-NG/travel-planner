@@ -1,7 +1,6 @@
 // NOTE: middleware that handles advanced querying features
-import asyncHandler from "../middleware/async";
 
-const advancedResults = (model, populate) => asyncHandler(async (req, res, next) => {
+const advancedResults = (model, populate) => async (req, res) => {
 	let query;
 
 	// STUB: copy req.query into a new object
@@ -85,7 +84,6 @@ const advancedResults = (model, populate) => asyncHandler(async (req, res, next)
 		data: results,
 	};
 
-	next();
-});
+};
 
 export default advancedResults;

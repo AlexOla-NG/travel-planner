@@ -3,12 +3,12 @@ import mongoose, {Schema, models} from "mongoose";
 // STUB: create user schema
 const userSchema = new Schema(
 	{
-		firstname: {
+		firstName: {
 			type: String,
 			required: [true, "Please add a first name"],
 		},
-		lastname: { type: String, required: [true, "Please add a last name"] },
-		fullname: String,
+		lastName: { type: String, required: [true, "Please add a last name"] },
+		fullName: String,
 		email: {
 			type: String,
 			required: [true, "Please add an email"],
@@ -24,7 +24,7 @@ const userSchema = new Schema(
 
 // STUB: create fullname field from the first & last name
 userSchema.pre("save", function (next) {
-	this.fullname = `${this.firstname} ${this.lastname}`;
+	this.fullName = `${this.firstName} ${this.lastName}`;
 	next();
 });
 
