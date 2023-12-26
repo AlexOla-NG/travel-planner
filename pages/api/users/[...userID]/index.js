@@ -1,15 +1,13 @@
 
+import getUser from "@/controllers/user/getUser";
 import { connectMongoDB } from "@/libs/mongodb";
-import User from "@/models/User";
 
 // connect to db
 connectMongoDB()
 
-// TODO: setup route to retrieve, update & delete individual user
-
 // get user
 export default async function handler(req, res) {
-  const { method } = req
+  const { method, params } = req
   try {
 
     if (method !== 'GET') {
@@ -18,11 +16,13 @@ export default async function handler(req, res) {
         .json({ success: false, message: 'Only GET requests are allowed.' });
     }
 
-    const data = await User.find()
+    const user = await getUser(params.id)
 
-    return res.status(200).json({ message: 'success', data })
-    // return res.status(200).json(res.advancedResults)
+    // if (!user)
+    //   return res.status(404).json({ message: `User not found with id of ${params.id}` });
+
+    // return res.status(200).json({ message: 'success', data: user })
   } catch (error) {
-    return res.status(500).json({ message: 'An error occured while fetching users.' })
+    return res.status(500).json({ message: 'An error occured while fetching user.' })
   }
 }

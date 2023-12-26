@@ -1,6 +1,6 @@
+import getUsers from "@/controllers/user/getUsers";
 import { connectMongoDB } from "@/libs/mongodb";
 import User from "@/models/User";
-import advancedResults from "@/utils/advancedResults";
 
 // connect to db
 connectMongoDB()
@@ -19,9 +19,9 @@ export default async function handler(req, res) {
     }
 
     const data = await User.find()
+    // const data = await getUsers()
 
     return res.status(200).json({ message: 'success', data })
-    // return res.status(200).json(res.advancedResults)
   } catch (error) {
     return res.status(500).json({ message: 'An error occured while fetching users.' })
   }
