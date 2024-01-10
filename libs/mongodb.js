@@ -11,9 +11,6 @@ const options = {
   socketTimeoutMS: 20000,
 };
 
-// TODO: stopped here
-// server returns 500 on first connection, please fix
-
 // TODO: implement recycled promises
 // see: https://github.com/vercel/next.js/discussions/12229#discussioncomment-45826
 const readyStates = {
@@ -23,7 +20,6 @@ const readyStates = {
   disconnecting: 3,
 };
 let pendingPromise = null
-
 
 if (!MONGO_DB_URI) {
   throw new Error('Invalid/Missing environment variable: "MONGO_DB_URI"');
