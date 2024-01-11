@@ -2,6 +2,8 @@ import getUsers from "@/controllers/user/getUsers";
 import { connectMongoDB } from "@/libs/mongodb";
 
 
+// TODO: refactor component to use apiHandler
+
 // TODO: implement advanced results function to handle sorting, filtering, pagination, etc
 
 // get all users

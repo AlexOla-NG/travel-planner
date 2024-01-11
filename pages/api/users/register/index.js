@@ -2,6 +2,8 @@ import { connectMongoDB } from "@/libs/mongodb";
 import User from "@/models/User";
 import bcrypt from "bcrypt";
 
+// TODO: refactor component to use apiHandler
+
 // connect to db
 connectMongoDB()
 
