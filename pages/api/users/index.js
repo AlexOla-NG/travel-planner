@@ -1,27 +1,22 @@
-import getUsers from "@/controllers/user/getUsers";
+import { getUsers, createNewUser } from "@/controllers/user";
 import { connectMongoDB } from "@/libs/mongodb";
-
-
-// TODO: refactor component to use apiHandler
+import { apiHandler } from "@/helpers/api/apiHandler";
 
 // TODO: implement advanced results function to handle sorting, filtering, pagination, etc
 
-// get all users
-export default async function handler(req, res) {
-  // connect to db
-  await connectMongoDB()
-  
-  const { method } = req
-  try {
-    if (method !== 'GET') {
-      return res
-        .status(405)
-        .json({ success: false, message: 'Only GET requests are allowed.' });
-    }
+await connectMongoDB()
 
-    await getUsers(res)
-  } catch (error) {
-    console.error(error)
-    return res.status(500).json({ message: 'An error occured while fetching users.' })
-  }
+export default apiHandler({
+  get: getAllUsers,
+  post: createUser,
+});
+
+// get all users
+async function getAllUsers(req, res) {
+  await getUsers(res)
+}
+
+// create user
+async function createUser(req, res) {
+  await createNewUser(req, res)
 }
