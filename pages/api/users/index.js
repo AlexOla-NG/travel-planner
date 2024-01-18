@@ -2,8 +2,6 @@ import { getUsers, createNewUser } from "@/controllers/user";
 import { connectMongoDB } from "@/libs/mongodb";
 import { apiHandler } from "@/helpers/api/apiHandler";
 
-// TODO: implement advanced results function to handle sorting, filtering, pagination, etc
-
 await connectMongoDB()
 
 export default apiHandler({
@@ -13,7 +11,7 @@ export default apiHandler({
 
 // get all users
 async function getAllUsers(req, res) {
-  await getUsers(res)
+  await getUsers(req, res)
 }
 
 // create user

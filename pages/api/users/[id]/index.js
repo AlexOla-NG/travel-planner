@@ -1,5 +1,5 @@
 
-import { deleteUser, getById, updateUser } from "@/controllers/user";
+import { deleteUser, getUserById, updateUser } from "@/controllers/user";
 import { apiHandler } from "@/helpers/api/apiHandler";
 import { connectMongoDB } from "@/libs/mongodb";
 
@@ -14,7 +14,7 @@ export default apiHandler({
 
 // get user
 async function getUser(req, res) {
-  await getById(req, res)
+  await getUserById(req, res)
 }
 
 // get user

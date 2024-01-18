@@ -1,4 +1,5 @@
 import User from "@/models/User"
+import advancedResults from "@/helpers/api/advancedResults";
 import bcrypt from "bcrypt";
 
 /**
@@ -8,13 +9,15 @@ import bcrypt from "bcrypt";
  * @returns {Promise<void>} A Promise that resolves to a JSON response containing the list of users.
  * @throws {string} Throws an error if no users are found in the database.
  */
-export async function getUsers(res) {
+export async function getUsers(req, res) {
   const users = await User.find()
 
   // if no user, throw error
   if (!users) throw 'No users in db'
 
-  return res.status(200).json({ message: 'success', data: users })
+  await advancedResults(User)(req, res)
+
+  return res.status(200).json(res.advancedResults)
 }
 
 /**
@@ -25,12 +28,14 @@ export async function getUsers(res) {
  * @returns {Promise<void>} A Promise that resolves to a JSON response containing the user information.
  * @throws {string} Throws an error if the user with the specified ID is not found.
  */
-export async function getById(req, res) {
+export async function getUserById(req, res) {
   const user = await User.findById(req.query.id)
 
   if (!user) throw 'User Not Found';
 
-  return res.status(200).json({ message: 'success', data: user })
+  await advancedResults(User)(req, res)
+
+  return res.status(200).json(res.advancedResults)
 }
 
 /**
