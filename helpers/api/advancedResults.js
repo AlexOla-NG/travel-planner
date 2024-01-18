@@ -22,12 +22,10 @@ const advancedResults = (model, populate) => async (req, res) => {
 	);
 
 	// STUB: finding resource
-	if(req.params.userId) {
-		query = model.find({ user: req.params.userId, ...JSON.parse(queryStr) });
-	
+	if(req.query.id) {
+		query = model.findById(req.query.id);
 	} else {
 		query = model.find(JSON.parse(queryStr));
-
 	}
 
 	// STUB: select fields
@@ -78,7 +76,7 @@ const advancedResults = (model, populate) => async (req, res) => {
 	}
 
 	res.advancedResults = {
-		success: true,
+		message: 'success',
 		count: results.length,
 		pagination,
 		data: results,
