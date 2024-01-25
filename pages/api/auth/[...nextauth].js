@@ -1,10 +1,15 @@
 import NextAuth from "next-auth"
-import AppleProvider from "next-auth/providers/apple"
 import EmailProvider from "next-auth/providers/email";
 import FacebookProvider from "next-auth/providers/facebook"
 import GoogleProvider from "next-auth/providers/google"
 import clientPromise from "@/libs/clientPromise";
 import { MongoDBAdapter } from "@auth/mongodb-adapter";
+
+// NOTE: we can't change the session strategy to database while using only email/google providers because only jwt strategy is supported. Changing to database strategy redirects the user to signin page after verifying account with magic link
+// see documentation 👉🏾: https://next-auth.js.org/configuration/nextjs#caveats
+
+// if we want to use database strategy, we'll need to use the CredentialsProvider
+// see solution 👉🏾: https://github.com/nextauthjs/next-auth/discussions/4394#discussioncomment-4785915
 
 export const authOptions = {
   adapter: MongoDBAdapter(clientPromise),
@@ -39,11 +44,10 @@ export const authOptions = {
     maxAge: 30 * 24 * 60 * 60, // 30 days
   },
   callbacks: {
-    async jwt({ token, account, profile }) {
+    async jwt({ token, account }) {
       // Persist the OAuth access_token and or the user id to the token right after signin
       if (account) {
         token.accessToken = account.access_token
-        token.id = profile.id
       }
       return token
     },
@@ -54,7 +58,7 @@ export const authOptions = {
       session.user.id = token.id
 
       return session
-    }
+    },
   }
 }
 
