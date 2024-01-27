@@ -17,12 +17,12 @@ async function getUser(req, res) {
   await getUserById(req, res)
 }
 
-// get user
+// update user
 async function update(req, res) {
   await updateUser(req, res)
 }
 
-// get user
+// delete user
 async function _delete(req, res) {
   await deleteUser(req, res)
 }
