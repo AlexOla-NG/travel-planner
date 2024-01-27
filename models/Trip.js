@@ -1,5 +1,9 @@
 import mongoose, { Schema, models } from "mongoose";
 
+// TODO: add accomodation type to help validate user input
+
+// TODO: add implementation for retrieving weather info on preSave middleware
+
 const TripType = {
   VACATION: 'vacation',
   BUSINESS: 'business',
