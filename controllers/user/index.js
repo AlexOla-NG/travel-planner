@@ -2,6 +2,8 @@ import User from "@/models/User"
 import advancedResults from "@/helpers/api/advancedResults";
 import bcrypt from "bcrypt";
 
+// TODO: create endpoint for getting user trips
+
 /**
  * Retrieves all users from the database.
  *

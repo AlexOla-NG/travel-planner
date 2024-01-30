@@ -4,6 +4,8 @@ import mongoose, { Schema, models } from "mongoose";
 
 // TODO: add implementation for retrieving weather info on preSave middleware
 
+// TODO: add custom validator library for better validation
+
 const TripType = {
   VACATION: 'vacation',
   BUSINESS: 'business',
