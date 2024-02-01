@@ -2,8 +2,6 @@ import User from "@/models/User"
 import advancedResults from "@/helpers/api/advancedResults";
 import bcrypt from "bcrypt";
 
-// TODO: create endpoint for getting user trips
-
 /**
  * Retrieves all users from the database.
  *
@@ -35,9 +33,7 @@ export async function getUserById(req, res) {
 
   if (!user) throw 'User Not Found';
 
-  await advancedResults(User)(req, res)
-
-  return res.status(200).json(res.advancedResults)
+  return res.status(200).json({ message: 'success', data: user })
 }
 
 /**

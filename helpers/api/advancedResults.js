@@ -1,6 +1,6 @@
 // NOTE: middleware that handles advanced querying features
 
-const advancedResults = (model, populate) => async (req, res) => {
+const advancedResults = (model, populate, idField) => async (req, res) => {
 	let query;
 
 	// STUB: copy req.query into a new object
@@ -22,8 +22,8 @@ const advancedResults = (model, populate) => async (req, res) => {
 	);
 
 	// STUB: finding resource
-	if(req.query.id) {
-		query = model.findById(req.query.id);
+	if (req.query.id && idField) {
+		query = model.find({ [idField]: req.query.id});
 	} else {
 		query = model.find(JSON.parse(queryStr));
 	}
