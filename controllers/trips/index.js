@@ -2,9 +2,6 @@ import advancedResults from "@/helpers/api/advancedResults";
 import Trip from "@/models/Trip";
 import User from "@/models/User";
 
-// TODO: stopped here
-// create endpoint for retrieving user trips...it should be in users/trip/userID
-
 /**
  * Creates a new trip based on the provided request data.
  *
@@ -42,27 +39,27 @@ export async function createTrip(req, res) {
 }
 
 /**
- * Updates an existing trip based on the provided request data.
+ * Retrieves all trips from the database and sends them as a response.
  *
- * @param {Object} req - Next.js API route request object containing trip ID as a query parameter and updated trip details in the request body.
- * @param {Object} res - Next.js API route response object to send the result of the operation.
- * @throws {string} Throws an error if the trip ID is not provided, the provided trip ID is invalid, or the updated trip details are not valid.
- * @returns {Object} JSON response with a success message and the updated trip data.
+ * @param {Object} req - Next.js API route request object.
+ * @param {Object} res - Next.js API route response object.
+ * @throws {string} Throws an error if there are no trips in the database.
+ * @returns {Object} JSON response with a success message and the retrieved trips data.
  */
-export async function updateTrip(req, res) {
-  // Retrieve and update the trip based on the provided ID and request body
-  const trip = await Trip.findByIdAndUpdate(req.query.id, req.body, {
-    new: true, // ensures the trip returned is the updated one
-    runValidators: true,
-  });
+export async function getTrips(req, res) {
+  // Retrieve all trips from the database
+  const trips = await Trip.find();
 
-  // If the trip ID is invalid, throw an error
-  if (!trip) {
-    throw 'Trip Not Found';
+  // If no trips are found, throw an error
+  if (!trips) {
+    throw 'No trips in db';
   }
 
-  // Send a success response with the updated trip data
-  res.status(200).json({ message: 'success', data: trip });
+  // Call the advancedResults middleware to handle advanced query parameters
+  await advancedResults(Trip)(req, res);
+
+  // Send a success response with the retrieved trips data
+  return res.status(200).json(res.advancedResults);
 }
 
 /**
@@ -87,27 +84,51 @@ export async function getTripById(req, res) {
 }
 
 /**
- * Retrieves all trips from the database and sends them as a response.
+ * Retrieves trips associated with a specific user, applying advanced query parameters and pagination.
  *
- * @param {Object} req - Next.js API route request object.
+ * @param {Object} req - Next.js API route request object containing user ID as a query parameter.
  * @param {Object} res - Next.js API route response object.
- * @throws {string} Throws an error if there are no trips in the database.
- * @returns {Object} JSON response with a success message and the retrieved trips data.
+ * @throws {string} Throws an error if the user with the provided ID is not found.
+ * @returns {Object} JSON response with a success message, count of retrieved trips, pagination information, and the retrieved trips data.
  */
-export async function getTrips(req, res) {
-  // Retrieve all trips from the database
-  const trips = await Trip.find();
+export async function getUserTrips(req, res) {
+  // Retrieve the user based on the provided ID
+  const user = await User.findById(req.query.id);
 
-  // If no trips are found, throw an error
-  if (!trips) {
-    throw 'No trips in db';
+  // Check if the user exists
+  if (!user) {
+    throw 'User Not Found';
   }
 
-  // Call the advancedResults middleware to handle advanced query parameters
-  await advancedResults(Trip)(req, res);
+  // Use advancedResults middleware for handling advanced queries and pagination
+  await advancedResults(Trip, null, 'userID')(req, res);
 
   // Send a success response with the retrieved trips data
-  return res.status(200).json(res.advancedResults);
+  res.status(200).json(res.advancedResults);
+}
+
+/**
+ * Updates an existing trip based on the provided request data.
+ *
+ * @param {Object} req - Next.js API route request object containing trip ID as a query parameter and updated trip details in the request body.
+ * @param {Object} res - Next.js API route response object to send the result of the operation.
+ * @throws {string} Throws an error if the trip ID is not provided, the provided trip ID is invalid, or the updated trip details are not valid.
+ * @returns {Object} JSON response with a success message and the updated trip data.
+ */
+export async function updateTrip(req, res) {
+  // Retrieve and update the trip based on the provided ID and request body
+  const trip = await Trip.findByIdAndUpdate(req.query.id, req.body, {
+    new: true, // ensures the trip returned is the updated one
+    runValidators: true,
+  });
+
+  // If the trip ID is invalid, throw an error
+  if (!trip) {
+    throw 'Trip Not Found';
+  }
+
+  // Send a success response with the updated trip data
+  res.status(200).json({ message: 'success', data: trip });
 }
 
 /**
