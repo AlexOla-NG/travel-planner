@@ -20,7 +20,7 @@ const TransportMode = {
   OTHER: 'other'
 }
 
-// STUB: create trip schema
+// create trip schema
 const tripSchema = new Schema(
   {
     name: {
@@ -41,13 +41,13 @@ const tripSchema = new Schema(
     startDate: { type: Date, required: [true, "Please enter start date"] },
     endDate: { type: Date, required: [true, "Please enter end date"] },
     dateFlexibility: { type: Boolean, required: [true, "Please enter date flexibility"] },
-    notes: { type: String },
-    userID: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+    notes: { type: String, maxLength: [500, "Notes cannot exceed 500 characters"] },
+    userID: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: [true, "Please add the userID"] },
     createdAt: { type: Date, default: Date.now },
   },
   { toJSON: { virtuals: true }, toObject: { virtuals: true } }
 );
 
-// STUB: connect schema to trips collection
+// connect schema to trips collection
 const Trip = models.Trip || mongoose.model("Trip", tripSchema);
 export default Trip;

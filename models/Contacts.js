@@ -12,7 +12,7 @@ const Relationship = {
   OTHER: 'other',
 }
 
-// STUB: create contact schema
+// create contact schema
 const contactSchema = new Schema({
   firstname: {
     type: String,
@@ -27,16 +27,16 @@ const contactSchema = new Schema({
     unique: true,
   },
   relationship: { type: String, enum: Object.values(Relationship), default: Relationship.FRIEND, required: [true, "Please enter relationship"] },
-  user: { type: Schema.Types.ObjectId, ref: 'User' },
+  userID: { type: Schema.Types.ObjectId, ref: 'User', required: [true, "Please add the userID"] },
   createdAt: { type: Date, default: Date.now },
 }, { toJSON: { virtuals: true }, toObject: { virtuals: true } })
 
-// STUB: create fullname field from the first & last name
+// create fullname field from the first & last name
 contactSchema.pre("save", function (next) {
   this.fullname = `${this.firstname} ${this.lastname}`;
   next();
 });
 
-// STUB: connect schema to contacts collection
+// connect schema to contacts collection
 const Contact = models.Contact || mongoose.model("Contact", contactSchema);
 export default Contact;
