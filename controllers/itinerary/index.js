@@ -1,11 +1,15 @@
+import advancedResults from "@/helpers/api/advancedResults";
 import Itinerary from "@/models/Itineraries";
 import Trip from "@/models/Trip";
 
-// TODO: stopped here
-// test api endpoints with postman
-// add jsdoc
-
-// create itinerary
+/**
+ * Creates a new itinerary.
+ * @async
+ * @param {Object} req - Next.js API route request object.
+ * @param {Object} res - Next.js API route response object.
+ * @throws {string} Throws an error if any compulsory field is empty or if the trip with the given ID is not found.
+ * @returns {Promise<void>} JSON response with a success message and the created itinerary data.
+ */
 export async function createItinerary(req, res) {
   // Extract itinerary details from the request body
   const { activity, startTime, endTime, tripID, notes } = req.body;
@@ -28,16 +32,14 @@ export async function createItinerary(req, res) {
   return res.status(201).json({ message: 'Itinerary created successfully', data });
 }
 
-// get all itineraries
+/**
+ * Retrieves all itineraries from the database and sends them as a response.
+ * @async
+ * @param {Object} req - Next.js API route request object.
+ * @param {Object} res - Next.js API route response object.
+ * @returns {Promise<void>} JSON response with a success message and the retrieved itineraries data.
+ */
 export async function getItineraries(req, res) {
-  // Retrieve all itineraries from the database
-  const itineraries = await Itinerary.find();
-
-  // If no itineraries are found, throw an error
-  if (!itineraries) {
-    throw 'No itineraries in db';
-  }
-
   // Call the advancedResults middleware to handle advanced query parameters
   await advancedResults(Itinerary)(req, res);
 
@@ -45,7 +47,14 @@ export async function getItineraries(req, res) {
   return res.status(200).json(res.advancedResults);
 }
 
-// get itinerary by id
+/**
+ * Retrieves an itinerary by its ID and sends it as a response.
+ * @async
+ * @param {Object} req - Next.js API route request object.
+ * @param {Object} res - Next.js API route response object.
+ * @throws {string} Throws an error if the itinerary with the provided ID is not found.
+ * @returns {Promise<void>} JSON response with a success message and the retrieved itinerary data.
+ */
 export async function getItineraryById(req, res) {
   // Retrieve the itinerary based on the provided ID
   const itinerary = await Itinerary.findById(req.query.id);
@@ -59,7 +68,14 @@ export async function getItineraryById(req, res) {
   res.status(200).json({ message: 'success', data: itinerary });
 }
 
-// update itinerary
+/**
+ * Updates an existing itinerary.
+ * @async
+ * @param {Object} req - Next.js API route request object.
+ * @param {Object} res - Next.js API route response object.
+ * @throws {string} Throws an error if the itinerary with the provided ID is not found.
+ * @returns {Promise<void>} JSON response with a success message and the updated itinerary data.
+ */
 export async function updateItinerary(req, res) {
   // Retrieve and update the itinerary based on the provided ID and request body
   const itinerary = await Itinerary.findByIdAndUpdate(req.query.id, req.body, {
@@ -76,7 +92,14 @@ export async function updateItinerary(req, res) {
   res.status(200).json({ message: 'success', data: itinerary });
 }
 
-// delete itinerary
+/**
+ * Deletes an itinerary by its ID.
+ * @async
+ * @param {Object} req - Next.js API route request object.
+ * @param {Object} res - Next.js API route response object.
+ * @throws {string} Throws an error if the itinerary with the provided ID is not found.
+ * @returns {Promise<void>} JSON response with a success message upon successful deletion.
+ */
 export async function deleteItinerary(req, res) {
   // Delete the itinerary based on the provided ID
   const itinerary = await Itinerary.findByIdAndDelete(req.query.id);
