@@ -2,7 +2,9 @@ import mongoose, { Schema, models } from "mongoose";
 
 // TODO: add accomodation type to help validate user input
 
-// TODO: add implementation for retrieving weather info on preSave middleware
+// TODO: preSave middleware
+// add implementation for retrieving weather info
+// add implementation that calculates total expenses per trip
 
 // TODO: add custom validator library for better validation
 
@@ -47,6 +49,26 @@ const tripSchema = new Schema(
   },
   { toJSON: { virtuals: true }, toObject: { virtuals: true } }
 );
+
+// cascade delete expenses and itineraries when a trip is deleted
+tripSchema.pre("remove", async function (next) {
+  await this.model("Itineraries").deleteMany({ tripID: this._id });
+  await this.model("Expenses").deleteMany({ tripID: this._id });
+  next();
+});
+
+// reverse populate with virtuals
+tripSchema.virtual("itineraries", {
+  ref: "Itineraries",
+  localField: "_id",
+  foreignField: "tripID",
+});
+
+tripSchema.virtual("expenses", {
+  ref: "Expenses",
+  localField: "_id",
+  foreignField: "tripID",
+});
 
 // connect schema to trips collection
 const Trip = models.Trip || mongoose.model("Trip", tripSchema);
