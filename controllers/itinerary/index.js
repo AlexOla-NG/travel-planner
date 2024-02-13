@@ -2,6 +2,15 @@ import advancedResults from "@/helpers/api/advancedResults";
 import Itinerary from "@/models/Itineraries";
 import Trip from "@/models/Trip";
 
+// TODO: I think we can better handle the API response for compulsory fields error.
+// Maybe display the mongoDB error, rather than the 'all fields are required' message our first validation throws.
+// What's the advantage of mongoDB vs our own message? What do you think?
+// I think this is something we should consider implementing when doing code cleanup.
+
+// another option would be to modify our validation checker
+// create a function that takes an array: compulsoryFields, and req.body
+// throw an error that displays compulsoryFields items that are not in req.body or contain empty values
+
 /**
  * Creates a new itinerary.
  * @async
