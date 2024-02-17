@@ -1,20 +1,24 @@
 import mongoose, {Schema, models} from "mongoose";
 
+// TODO: add validation for email field
+
 // create user schema
 const userSchema = new Schema(
 	{
 		firstName: {
 			type: String,
+			maxLength: [50, "firstName cannot exceed 50 characters"],
 			required: [true, "Please add a first name"],
 		},
-		lastName: { type: String, required: [true, "Please add a last name"] },
+		lastName: { type: String, maxLength: [50, "lastName cannot exceed 50 characters"], required: [true, "Please add a last name"],  },
 		fullName: String,
 		email: {
 			type: String,
+			maxLength: [50, "email cannot exceed 50 characters"],
 			required: [true, "Please add an email"],
 			unique: true,
 		},
-		phoneNumber: { type: String, required: [true, "Please add a phone number"], },
+		phoneNumber: { type: String, minLength: [7, "phoneNumber cannot be less than 7 characters"],maxLength: [15, "phoneNumber cannot exceed 15 characters"], required: [true, "Please add a phone number"], },
 		password: { type: String, required: [true, "Please add a password"] },
 		contacts: [{ type: Schema.Types.ObjectId, ref: 'Contact' }],
 		createdAt: { type: Date, default: Date.now },
