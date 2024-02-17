@@ -1,25 +1,23 @@
 import mongoose, { Schema, models } from "mongoose";
-
-// TODO: add accomodation type to help validate user input
+import { generateEnumValidationMessage } from "./utils";
 
 // TODO: preSave middleware
 // add implementation for retrieving weather info
 // add implementation that calculates total expenses per trip
 
-// TODO: add custom validator library for better validation
-
-const TripType = {
-  VACATION: 'vacation',
-  BUSINESS: 'business',
-  OTHER: 'other'
+const TripEnum = {
+  name: 'trip type',
+  values: ['vacation', 'business', 'other']
 }
 
-const TransportMode = {
-  AIR: 'air',
-  ROAD: 'road',
-  RAIL: 'rail',
-  WATER: 'water',
-  OTHER: 'other'
+const TransportEnum = {
+  name: 'transport mode',
+  values: ['air', 'road', 'rail', 'water', 'other']
+}
+
+const AccommodationEnum = {
+  name: 'accommodation type',
+  values: ['hotel', 'guesthouse', 'airbnb', 'resort', 'apartment', 'rental', 'other']
 }
 
 // create trip schema
@@ -37,9 +35,27 @@ const tripSchema = new Schema(
       type: ['String'],
       required: [true, "Please enter destination(s)"],
     },
-    tripType: { type: String, enum: Object.values(TripType), required: [true, "Please enter trip type"] },
-    accommodationType: { type: String, required: [true, "Please enter accommodation type"] },
-    transportMode: { type: String, enum: Object.values(TransportMode), required: [true, "Please enter mode of transport"] },
+    tripType: {
+      type: String,
+      enum: {
+        values: TripEnum.values,
+        message: generateEnumValidationMessage(TripEnum)
+      },
+      required: [true, "Please enter trip type"]
+    },
+    accommodationType: {
+      type: String, enum: {
+        values: AccommodationEnum.values,
+        message: generateEnumValidationMessage(AccommodationEnum)
+      },
+      required: [true, "Please enter accommodation type"] },
+    transportMode: {
+      type: String,
+      enum: {
+        values: TransportEnum.values,
+        message: generateEnumValidationMessage(TransportEnum)
+      },
+      required: [true, "Please enter mode of transport"] },
     startDate: { type: Date, required: [true, "Please enter start date"] },
     endDate: { type: Date, required: [true, "Please enter end date"] },
     dateFlexibility: { type: Boolean, required: [true, "Please enter date flexibility"] },
