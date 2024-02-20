@@ -1,3 +1,4 @@
+import { connectMongoDB } from "@/libs/mongodb";
 import { errorHandler } from "./errorHandler";
 
 export { apiHandler };
@@ -5,7 +6,11 @@ export { apiHandler };
 // api routes middleware
 // https://jasonwatmore.com/next-js-13-middleware-for-authentication-and-error-handling-on-api-routes
 function apiHandler(handler) {
+
   return async (req, res) => {
+    // connect to db
+    await connectMongoDB()
+
     const method = req.method.toLowerCase();
 
     // check handler supports HTTP method

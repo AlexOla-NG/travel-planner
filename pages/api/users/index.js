@@ -1,8 +1,5 @@
 import { getUsers, createNewUser } from "@/controllers/user";
-import { connectMongoDB } from "@/libs/mongodb";
 import { apiHandler } from "@/helpers/api/apiHandler";
-
-await connectMongoDB()
 
 export default apiHandler({
   get: getAllUsers,

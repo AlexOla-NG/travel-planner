@@ -1,10 +1,6 @@
 
 import { deleteTrip, getTripById, updateTrip } from "@/controllers/trips";
 import { apiHandler } from "@/helpers/api/apiHandler";
-import { connectMongoDB } from "@/libs/mongodb";
-
-// connect to db
-await connectMongoDB()
 
 export default apiHandler({
   get: getTrip,

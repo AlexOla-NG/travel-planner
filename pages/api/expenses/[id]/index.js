@@ -1,10 +1,6 @@
 
 import { deleteExpenseById, getExpenseById, updateExpenseById } from "@/controllers/expenses";
 import { apiHandler } from "@/helpers/api/apiHandler";
-import { connectMongoDB } from "@/libs/mongodb";
-
-// connect to db
-await connectMongoDB()
 
 export default apiHandler({
   get: getExpense,
