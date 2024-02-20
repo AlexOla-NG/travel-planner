@@ -3,23 +3,11 @@ import mongoose from "mongoose";
 const MONGO_DB_URI = process.env.MONGO_DB_URI;
 
 const options = {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
   bufferCommands: false,
   maxIdleTimeMS: 10000,
   serverSelectionTimeoutMS: 10000,
   socketTimeoutMS: 20000,
 };
-
-// TODO: implement recycled promises
-// see: https://github.com/vercel/next.js/discussions/12229#discussioncomment-45826
-const readyStates = {
-  disconnected: 0,
-  connected: 1,
-  connecting: 2,
-  disconnecting: 3,
-};
-let pendingPromise = null
 
 if (!MONGO_DB_URI) {
   throw new Error('Invalid/Missing environment variable: "MONGO_DB_URI"');
@@ -46,5 +34,4 @@ export const connectMongoDB = async () => {
     console.log('error connecting to mongoDB:', error);
     throw error; // Re-throw the error for further handling
   }
-
 };
