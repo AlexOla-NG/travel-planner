@@ -1,4 +1,5 @@
 import advancedResults from "@/helpers/api/advancedResults";
+import { validateRequiredFields } from "@/helpers/api/utils";
 import Trip from "@/models/Trip";
 import User from "@/models/User";
 
@@ -11,19 +12,12 @@ import User from "@/models/User";
  * @returns {Object} JSON response with a success message and the created trip data.
  */
 export async function createTrip(req, res) {
-  // Extracting trip details from the request body
-  const { name, startingLocation, destination, tripType, accommodationType, transportMode, startDate, endDate, dateFlexibility, notes } = req.body;
+  // Extract trip details from the request body
+  const { name, startingLocation, destination, tripType, accommodationType, transportMode, startDate, endDate, dateFlexibility, userID, notes } = req.body;
 
   // Check if all compulsory fields are not empty
-  if (!name || !startingLocation || !destination || !tripType || !accommodationType || !transportMode || !startDate || !endDate || !dateFlexibility) {
-    throw 'All fields are required';
-  }
-
-  // Check if userID is provided and check if user with that ID exists
-  const userID = req.body.userID;
-  if (!userID) {
-    throw 'User ID is required';
-  }
+  let compulsoryFields = ["name", "startingLocation", "destination", "tripType", "accommodationType", "transportMode", "startDate", "endDate", "dateFlexibility", "userID"];
+  validateRequiredFields(compulsoryFields, req.body)
 
   // Check if user exists
   const user = await User.findById(userID);
@@ -43,17 +37,11 @@ export async function createTrip(req, res) {
  *
  * @param {Object} req - Next.js API route request object.
  * @param {Object} res - Next.js API route response object.
- * @throws {string} Throws an error if there are no trips in the database.
  * @returns {Object} JSON response with a success message and the retrieved trips data.
  */
 export async function getTrips(req, res) {
   // Retrieve all trips from the database
   const trips = await Trip.find();
-
-  // If no trips are found, throw an error
-  if (!trips) {
-    throw 'No trips in db';
-  }
 
   // Call the advancedResults middleware to handle advanced query parameters
   await advancedResults(Trip)(req, res);

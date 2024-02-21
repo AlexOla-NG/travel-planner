@@ -1,19 +1,16 @@
 import User from "@/models/User"
 import advancedResults from "@/helpers/api/advancedResults";
 import bcrypt from "bcrypt";
+import { validateRequiredFields } from "@/helpers/api/utils";
 
 /**
  * Retrieves all users from the database.
  *
  * @param {Object} res - NextResponse object.
  * @returns {Promise<void>} A Promise that resolves to a JSON response containing the list of users.
- * @throws {string} Throws an error if no users are found in the database.
  */
 export async function getUsers(req, res) {
   const users = await User.find()
-
-  // if no user, throw error
-  if (!users) throw 'No users in db'
 
   await advancedResults(User)(req, res)
 
@@ -47,8 +44,9 @@ export async function getUserById(req, res) {
 export async function createNewUser(req, res) {
   const { firstName, lastName, email, password, phoneNumber } = req.body
 
-  // check if all fields are filled out
-  if (!firstName || !lastName || !email || !password || !phoneNumber) throw 'All fields are required';
+  // Check if all compulsory fields are not empty
+  let compulsoryFields = ["firstName", "lastName", "email", "password", "phoneNumber"];
+  validateRequiredFields(compulsoryFields, req.body)
 
   // check if email already exists
   const user = await User.findOne({ email });

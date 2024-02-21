@@ -1,13 +1,10 @@
 import advancedResults from "@/helpers/api/advancedResults";
+import { validateRequiredFields } from "@/helpers/api/utils";
 import Expenses from "@/models/Expenses";
 import Trip from "@/models/Trip";
 
 // setup eslintrc to remove unused imports
 // remove nonexistent modules
-
-// TODO: stopped here
-// if amount is 0, validation check throws 'All fields are required' error
-// please fix
 
 /**
  * Creates a new expense based on the provided request data.
@@ -21,9 +18,8 @@ export const createExpense = async (req, res) => {
   const { category, amount, date, tripID } = req.body;
 
   // Check if all compulsory fields are not empty
-  if (!category || !amount || !date || !tripID) {
-    throw 'All fields are required';
-  }
+  let compulsoryFields = ["category", "amount", "date", "tripID"];
+  validateRequiredFields(compulsoryFields, req.body)
 
   // Check if trip with the given ID exists
   const trip = await Trip.findById(tripID);
