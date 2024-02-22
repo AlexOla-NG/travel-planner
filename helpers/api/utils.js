@@ -41,4 +41,20 @@ export function validateRequiredFields(requiredFields, requestBody) {
  */
 export const isNotEmptyArray = (arr) => Array.isArray(arr) && arr.length > 0;
 
-// TODO: create function that trims whitespace from req.body
+/**
+ * Trims white spaces from the beginning and end of strings in an object or a single string.
+ * source 👉🏾 https://github.com/ankitaabad/request_trimmer/tree/master
+ * @param {string|object} input - The input string or object to be trimmed.
+ * @returns {string|object} - The trimmed string or object.
+ */
+export const trim_string = (input) => {
+  if (typeof input === 'string') {
+    return input.trim();
+  }
+  if (input !== null && typeof input === 'object') {
+    Object.keys(input).forEach((key) => {
+      input[key] = trim_string(input[key]);
+    });
+  }
+  return input;
+}
