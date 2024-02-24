@@ -1,6 +1,3 @@
-// TODO: setup eslint config
-// this needs to run before every commit or on file save
-
 {
 	"env": {
 		"browser": true,
