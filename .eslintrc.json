@@ -1,3 +1,95 @@
+// TODO: setup eslint config
+// this needs to run before every commit or on file save
+
 {
-  "extends": "next/core-web-vitals"
+	"env": {
+		"browser": true,
+		"es2021": true,
+		"node": true,
+		"jest": true
+	},
+	"extends": [
+		"eslint:recommended",
+		"plugin:react/recommended",
+		"plugin:prettier/recommended",
+		"plugin:@next/next/recommended"
+	],
+	"parserOptions": {
+		"ecmaFeatures": {
+			"jsx": true
+		},
+		"ecmaVersion": "latest",
+		"sourceType": "module"
+	},
+	"plugins": [
+		"prettier",
+		"react",
+		"react-hooks",
+		"eslint-plugin-import-helpers"
+	],
+	"ignorePatterns": ["next-env.d.ts"], //this is being ignored because the file regenerates on every build hence overriding linting.
+	"rules": {
+		"no-undef": "error",
+		"import-helpers/order-imports": [
+			"error",
+			{
+				// useful thing to note: For every new absolute path added in tsconf.json, add the respective path here in the same order also to ensure consistency
+				"newlinesBetween": "always",
+				"groups": [
+					"module",
+					"/^@components/",
+					"/^@hooks/",
+					"/^@graphql/",
+					"/^@schemas/",
+					"/^@dto/",
+					"/^@shared/",
+					"/^@componentData/",
+					"/^@pages/",
+					"/^@atoms/",
+					"/^@molecules/",
+					"/^@organisms/",
+					"/^@layouts/",
+					"/^@modules/",
+					"/^@images/",
+					"/^@skeletons/",
+					"/^@modals/",
+					["parent", "sibling", "index"]
+				],
+				"alphabetize": { "order": "asc", "ignoreCase": true }
+			}
+		],
+		"react/jsx-sort-props": [
+			"warn",
+			{
+				"ignoreCase": true
+			}
+		],
+		"react/require-default-props": [
+			"error",
+			{
+				"forbidDefaultForRequired": true
+			}
+		],
+		"react/prop-types": [
+			"warn",
+			{
+				"ignore": ["children"]
+			}
+		],
+		"eqeqeq": "error",
+		"no-console": "warn",
+		"prettier/prettier": "error",
+		"react-hooks/rules-of-hooks": "error",
+		"react-hooks/exhaustive-deps": "warn",
+		"react/react-in-jsx-scope": "off",
+		"no-param-reassign": "error",
+		"react/self-closing-comp": "error",
+		"react/no-unused-state": "error",
+		"react/no-unused-prop-types": "warn"
+	},
+	"settings": {
+		"react": {
+			"version": "18.1.0"
+		}
+	}
 }
