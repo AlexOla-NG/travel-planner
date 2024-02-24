@@ -8,10 +8,10 @@ export default apiHandler({
 
 // get all users
 async function getAllUsers(req, res) {
-  await getUsers(req, res)
+  await getUsers(req, res);
 }
 
 // create user
 async function createUser(req, res) {
-  await createNewUser(req, res)
+  await createNewUser(req, res);
 }

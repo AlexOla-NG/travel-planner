@@ -1,24 +1,23 @@
-import Link from 'next/link';
-import React from 'react'
-import { signIn } from 'next-auth/react';
+import { signIn } from "next-auth/react";
+import Link from "next/link";
+import React from "react";
 
 const SignUp = () => {
-
   const handleClick = (e) => {
     e.preventDefault();
-    signIn()
-  }
+    signIn();
+  };
   return (
-		<div>
-			<div>SignUp Page</div>
+    <div>
+      <div>SignUp Page</div>
 
-			<div>
-				<Link href="/api/auth/signin" onClick={handleClick}>
-					SignIn with Google
-				</Link>
-			</div>
-		</div>
+      <div>
+        <Link href="/api/auth/signin" onClick={handleClick}>
+          SignIn with Google
+        </Link>
+      </div>
+    </div>
   );
-}
+};
 
-export default SignUp
+export default SignUp;

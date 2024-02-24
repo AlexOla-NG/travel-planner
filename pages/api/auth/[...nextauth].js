@@ -1,9 +1,9 @@
-import NextAuth from "next-auth"
-import EmailProvider from "next-auth/providers/email";
-import FacebookProvider from "next-auth/providers/facebook"
-import GoogleProvider from "next-auth/providers/google"
 import clientPromise from "@/libs/clientPromise";
 import { MongoDBAdapter } from "@auth/mongodb-adapter";
+import NextAuth from "next-auth";
+import EmailProvider from "next-auth/providers/email";
+import FacebookProvider from "next-auth/providers/facebook";
+import GoogleProvider from "next-auth/providers/google";
 
 // NOTE: we can't change the session strategy to database while using only email/google providers because only jwt strategy is supported. Changing to database strategy redirects the user to signin page after verifying account with magic link
 // see documentation 👉🏾: https://next-auth.js.org/configuration/nextjs#caveats
@@ -21,10 +21,10 @@ export const authOptions = {
         port: process.env.EMAIL_SERVER_PORT,
         auth: {
           user: process.env.EMAIL_SERVER_USER,
-          pass: process.env.EMAIL_SERVER_PASSWORD
-        }
+          pass: process.env.EMAIL_SERVER_PASSWORD,
+        },
       },
-      from: process.env.EMAIL_FROM
+      from: process.env.EMAIL_FROM,
     }),
     GoogleProvider({
       clientId: process.env.GOOGLE_ID,
@@ -47,19 +47,18 @@ export const authOptions = {
     async jwt({ token, account }) {
       // Persist the OAuth access_token and or the user id to the token right after signin
       if (account) {
-        token.accessToken = account.access_token
+        token.accessToken = account.access_token;
       }
-      return token
+      return token;
     },
-    async session({ session, token, user }) {
-
+    async session({ session, token }) {
       // Send properties to the client, like an access_token and user id from a provider.
-      session.accessToken = token.accessToken
-      session.user.id = token.id
+      session.accessToken = token.accessToken;
+      session.user.id = token.id;
 
-      return session
+      return session;
     },
-  }
-}
+  },
+};
 
-export default NextAuth(authOptions)
+export default NextAuth(authOptions);

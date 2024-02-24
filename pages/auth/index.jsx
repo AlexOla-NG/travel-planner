@@ -1,10 +1,8 @@
-import SignUp from '@/components/authentication/SignUp'
-import React from 'react'
+import SignUp from "@/components/authentication/SignUp";
+import React from "react";
 
 const index = () => {
-  return (
-    <SignUp />
-  )
-}
+  return <SignUp />;
+};
 
-export default index
+export default index;
