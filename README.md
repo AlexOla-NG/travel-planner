@@ -4,7 +4,7 @@ A design of the Travel Planner App
 
 ### Environmental Variables
 
-The project's environmental variables (for the development environment) are stored in a `.env` file in the project root. This file is intended for use during docker container creation.
+The project's environmental variables (for the development environment) are stored in a `.env` file in the project root.
 
 #### Required Packages and Server
 
@@ -64,6 +64,9 @@ yarn run format
 
 ## Commit emojis
 🔥: new feature
+
 📦: package update/install
+
 🛠️: todo
+
 🧹: chore
