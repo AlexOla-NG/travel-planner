@@ -1,0 +1,56 @@
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  font-family: $global-font-family;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  transition: color 0.3s ease-in-out;
+  width: 100%;
+}
+
+body {
+  background-color: color(White);
+  color: $body-font-color;
+  font-size: $body-font-size;
+  text-rendering: optimizeLegibility;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0;
+  padding: 0;
+
+  &:hover {
+    cursor: default;
+  }
+}
+
+.hide {
+  display: none !important;
+}
+
+// links
+a {
+  color: inherit;
+  cursor: pointer;
+  text-decoration: inherit;
+}
+
+// Reset images for responsive behavior
+img {
+  max-width: 100%;
+}
+
+// Set vertical alignment for svg elements
+svg {
+  vertical-align: middle;
+}

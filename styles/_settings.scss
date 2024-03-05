@@ -1,0 +1,17 @@
+// Globals
+$global-font-size: 100%;
+$global-font-family: "Mulish", sans-serif;
+
+// Body styles
+$body-font-size: $global-font-size;
+$body-font-color: #1c1d1f;
+
+// Font weights
+$font-weight-light: 300;
+$font-weight-regular: 400;
+$font-weight-dense: 500;
+$font-weight-medium: 600;
+$font-weight-bold: 700;
+
+// Max Page Content Width
+$global-max-width: to-rem(1440);
