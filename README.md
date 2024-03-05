@@ -1,4 +1,28 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Travel Planner
+
+A design of the Travel Planner App
+
+### Environmental Variables
+
+The project's environmental variables (for the development environment) are stored in a `.env` file in the project root. This file is intended for use during docker container creation.
+
+#### Required Packages and Server
+
+Install the node dependencies:
+
+    yarn install
+
+Run gulp to build required assets:
+
+    yarn run-script gulp-dist
+
+Or to run gulp in development:
+
+    yarn run-script gulp-dev
+
+Start the application:
+
+    yarn dev
 
 ## Getting Started
 
@@ -24,17 +48,22 @@ The `pages/api` directory is mapped to `/api/*`. Files in this directory are tre
 
 This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
-## Learn More
+### Styles
 
-To learn more about Next.js, take a look at the following resources:
+Styles are built in a modular way. Each folder houses the styles needed for it to render. The project uses camelCase naming convention.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Shared styles are housed in `assets/styles` directory. Compiled styles built from components and page styles used in production can be found in the `build/static/css/styles.chunk.css` file.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+### Linting
 
-## Deploy on Vercel
+Ensure that you run the linting tools on your code changes in order for them to pass the build when you create a PR.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```sh
+yarn run format
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## Commit emojis
+🔥: new feature
+📦: package update/install
+🛠️: todo
+🧹: chore
