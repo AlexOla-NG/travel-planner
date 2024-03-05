@@ -16,20 +16,20 @@ export async function createItinerary(req, res) {
   const { activity, startTime, endTime, tripID, notes } = req.body;
 
   // Check if all compulsory fields are not empty
-  let compulsoryFields = ['activity', 'startTime', 'endTime', 'tripID'];
-  validateRequiredFields(compulsoryFields, req.body)
+  let compulsoryFields = ["activity", "startTime", "endTime", "tripID"];
+  validateRequiredFields(compulsoryFields, req.body);
 
   // Check if trip with the given ID exists
   const trip = await Trip.findById(tripID);
   if (!trip) {
-    throw 'Trip Not Found';
+    throw "Trip Not Found";
   }
 
   // Create a new itinerary
   const data = await Itinerary.create({ activity, startTime, endTime, tripID, notes });
 
   // Send a success response with the created Itinerary data
-  return res.status(201).json({ message: 'Itinerary created successfully', data });
+  return res.status(201).json({ message: "Itinerary created successfully", data });
 }
 
 /**
@@ -61,11 +61,11 @@ export async function getItineraryById(req, res) {
 
   // If the itinerary ID is invalid, throw an error
   if (!itinerary) {
-    throw 'Itinerary Not Found';
+    throw "Itinerary Not Found";
   }
 
   // Send a success response with the retrieved itinerary data
-  res.status(200).json({ message: 'success', data: itinerary });
+  res.status(200).json({ message: "success", data: itinerary });
 }
 
 /**
@@ -85,11 +85,11 @@ export async function updateItinerary(req, res) {
 
   // If the itinerary ID is invalid, throw an error
   if (!itinerary) {
-    throw 'Itinerary Not Found';
+    throw "Itinerary Not Found";
   }
 
   // Send a success response with the updated itinerary data
-  res.status(200).json({ message: 'success', data: itinerary });
+  res.status(200).json({ message: "success", data: itinerary });
 }
 
 /**
@@ -106,9 +106,9 @@ export async function deleteItinerary(req, res) {
 
   // If the itinerary ID is invalid, throw an error
   if (!itinerary) {
-    throw 'Itinerary Not Found';
+    throw "Itinerary Not Found";
   }
 
   // Send a success response upon successful deletion
-  res.status(200).json({ message: 'success' });
+  res.status(200).json({ message: "success" });
 }

@@ -5,6 +5,6 @@
  */
 export function generateEnumValidationMessage(enumObject) {
   const enumName = enumObject.name;
-  const validValues = enumObject.values.join(', ');
+  const validValues = enumObject.values.join(", ");
   return `{VALUE} is not a valid value for ${enumName}. Valid ${enumName} values include: ${validValues}`;
 }

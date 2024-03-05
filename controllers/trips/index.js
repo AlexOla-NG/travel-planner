@@ -17,19 +17,19 @@ export async function createTrip(req, res) {
 
   // Check if all compulsory fields are not empty
   let compulsoryFields = ["name", "startingLocation", "destination", "tripType", "accommodationType", "transportMode", "startDate", "endDate", "dateFlexibility", "userID"];
-  validateRequiredFields(compulsoryFields, req.body)
+  validateRequiredFields(compulsoryFields, req.body);
 
   // Check if user exists
   const user = await User.findById(userID);
   if (!user) {
-    throw 'User Not Found';
+    throw "User Not Found";
   }
 
   // Create a new trip
   const data = await Trip.create({ name, startingLocation, destination, tripType, accommodationType, transportMode, startDate, endDate, dateFlexibility, notes, userID });
 
   // Send a success response with the created trip data
-  return res.status(201).json({ message: 'Trip created successfully', data });
+  return res.status(201).json({ message: "Trip created successfully", data });
 }
 
 /**
@@ -40,9 +40,6 @@ export async function createTrip(req, res) {
  * @returns {Object} JSON response with a success message and the retrieved trips data.
  */
 export async function getTrips(req, res) {
-  // Retrieve all trips from the database
-  const trips = await Trip.find();
-
   // Call the advancedResults middleware to handle advanced query parameters
   await advancedResults(Trip)(req, res);
 
@@ -64,11 +61,11 @@ export async function getTripById(req, res) {
 
   // If the trip ID is invalid, throw an error
   if (!trip) {
-    throw 'Trip Not Found';
+    throw "Trip Not Found";
   }
 
   // Send a success response with the retrieved trip data
-  res.status(200).json({ message: 'success', data: trip });
+  res.status(200).json({ message: "success", data: trip });
 }
 
 /**
@@ -85,11 +82,11 @@ export async function getUserTrips(req, res) {
 
   // Check if the user exists
   if (!user) {
-    throw 'User Not Found';
+    throw "User Not Found";
   }
 
   // Use advancedResults middleware for handling advanced queries and pagination
-  await advancedResults(Trip, null, 'userID')(req, res);
+  await advancedResults(Trip, null, "userID")(req, res);
 
   // Send a success response with the retrieved trips data
   res.status(200).json(res.advancedResults);
@@ -112,11 +109,11 @@ export async function updateTrip(req, res) {
 
   // If the trip ID is invalid, throw an error
   if (!trip) {
-    throw 'Trip Not Found';
+    throw "Trip Not Found";
   }
 
   // Send a success response with the updated trip data
-  res.status(200).json({ message: 'success', data: trip });
+  res.status(200).json({ message: "success", data: trip });
 }
 
 /**
@@ -133,9 +130,9 @@ export async function deleteTrip(req, res) {
 
   // If the trip ID is invalid, throw an error
   if (!trip) {
-    throw 'Trip Not Found';
+    throw "Trip Not Found";
   }
 
   // Send a success response upon successful deletion
-  res.status(200).json({ message: 'success' });
+  res.status(200).json({ message: "success" });
 }

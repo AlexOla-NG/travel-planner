@@ -6,7 +6,7 @@ const itinerarySchema = new Schema(
     activity: {
       type: String,
       required: [true, "Please enter activity"],
-      maxLength: [500, "Activity cannot exceed 500 characters"]
+      maxLength: [500, "Activity cannot exceed 500 characters"],
     },
     startTime: { type: Date, required: [true, "Please enter start time"] },
     endTime: { type: Date, required: [true, "Please enter end time"] },
@@ -14,7 +14,7 @@ const itinerarySchema = new Schema(
     tripID: { type: mongoose.Schema.Types.ObjectId, ref: "Trip", required: [true, "Please add the tripID"] },
     createdAt: { type: Date, default: Date.now },
   },
-  { toJSON: { virtuals: true }, toObject: { virtuals: true } }
+  { toJSON: { virtuals: true }, toObject: { virtuals: true } },
 );
 
 // connect schema to itinerary collection

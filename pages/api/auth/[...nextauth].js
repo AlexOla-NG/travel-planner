@@ -1,5 +1,5 @@
-import clientPromise from "@/libs/clientPromise";
 import { MongoDBAdapter } from "@auth/mongodb-adapter";
+import clientPromise from "@libs/clientPromise";
 import NextAuth from "next-auth";
 import EmailProvider from "next-auth/providers/email";
 import FacebookProvider from "next-auth/providers/facebook";

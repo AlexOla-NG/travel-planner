@@ -1,24 +1,25 @@
 {
-	"compilerOptions": {
-		"baseUrl": ".",
-		"paths": {
-			"@components/*": ["src/components/*"],
-			"@libs/*": ["src/libs/*"],
-			"@hooks/*": ["src/hooks/*"],
-			"@schemas/*": ["src/schemas/*"],
-			"@dto/*": ["src/dto/*"],
-			"@shared/*": ["src/shared/*"],
-			"@componentData/*": ["src/componentData/*"],
-			"@pages/*": ["pages/*"],
-			"@atoms/*": ["src/components/atoms/*"],
-			"@molecules/*": ["src/components/molecules/*"],
-			"@organisms/*": ["src/components/organisms/*"],
-			"@layouts/*": ["src/components/layouts/*"],
-			"@modules/*": ["src/modules/*"],
-			"@images/*": ["public/images/*"],
-			"@skeletons/*": ["src/skeletons/*"],
-			"@modals/*": ["src/modals/*"],
-			"@services/*": ["src/services/*"]
-		}
-	}
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@components/*": ["/components/*"],
+      "@libs/*": ["/libs/*"],
+      "@hooks/*": ["/hooks/*"],
+      "@schemas/*": ["/schemas/*"],
+      "@dto/*": ["/dto/*"],
+      "@shared/*": ["/shared/*"],
+      "@componentData/*": ["/componentData/*"],
+      "@pages/*": ["pages/*"],
+      "@atoms/*": ["/components/atoms/*"],
+      "@molecules/*": ["/components/molecules/*"],
+      "@organisms/*": ["/components/organisms/*"],
+      "@layouts/*": ["/components/layouts/*"],
+      "@modules/*": ["/modules/*"],
+      "@images/*": ["public/images/*"],
+      "@skeletons/*": ["/skeletons/*"],
+      "@modals/*": ["/modals/*"],
+      "@services/*": ["/services/*"],
+      "@styles/*": ["/styles/*"]
+    }
+  }
 }

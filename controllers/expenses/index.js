@@ -3,9 +3,6 @@ import { validateRequiredFields } from "@/helpers/api/utils";
 import Expenses from "@/models/Expenses";
 import Trip from "@/models/Trip";
 
-// setup eslintrc to remove unused imports
-// remove nonexistent modules
-
 /**
  * Creates a new expense based on the provided request data.
  *
@@ -19,17 +16,17 @@ export const createExpense = async (req, res) => {
 
   // Check if all compulsory fields are not empty
   let compulsoryFields = ["category", "amount", "date", "tripID"];
-  validateRequiredFields(compulsoryFields, req.body)
+  validateRequiredFields(compulsoryFields, req.body);
 
   // Check if trip with the given ID exists
   const trip = await Trip.findById(tripID);
   if (!trip) {
-    throw 'Trip Not Found';
+    throw "Trip Not Found";
   }
 
   const data = await Expenses.create({ category, amount, date, tripID });
-  res.status(201).json({ message: 'Expense created successfully', data });
-}
+  res.status(201).json({ message: "Expense created successfully", data });
+};
 
 /**
  * Retrieves all expenses, applying advanced query parameters and pagination.
@@ -44,7 +41,7 @@ export const getExpenses = async (req, res) => {
 
   // Send a success response with the retrieved expenses data
   return res.status(200).json(res.advancedResults);
-}
+};
 
 /**
  * Retrieves an expense by its ID.
@@ -60,12 +57,12 @@ export const getExpenseById = async (req, res) => {
 
   // If the expense ID is invalid, throw an error
   if (!expense) {
-    throw 'Expense Not Found';
+    throw "Expense Not Found";
   }
 
   // Send a success response with the retrieved expense data
-  return res.status(200).json({ message: 'success', data: expense });
-}
+  return res.status(200).json({ message: "success", data: expense });
+};
 
 /**
  * Updates an expense by its ID based on the provided request data.
@@ -81,12 +78,12 @@ export const updateExpenseById = async (req, res) => {
 
   // If the expense ID is invalid, throw an error
   if (!expense) {
-    throw 'Expense Not Found';
+    throw "Expense Not Found";
   }
 
   // Send a success response with the updated expense data
-  return res.status(200).json({ message: 'success', data: expense });
-}
+  return res.status(200).json({ message: "success", data: expense });
+};
 
 /**
  * Deletes an expense by its ID.
@@ -102,9 +99,9 @@ export const deleteExpenseById = async (req, res) => {
 
   // If the expense ID is invalid, throw an error
   if (!expense) {
-    throw 'Expense Not Found';
+    throw "Expense Not Found";
   }
 
   // Send a success response with a success message
-  return res.status(200).json({ message: 'success' });
-}
+  return res.status(200).json({ message: "success" });
+};

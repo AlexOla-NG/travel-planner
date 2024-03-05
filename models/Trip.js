@@ -6,19 +6,19 @@ import { generateEnumValidationMessage } from "./utils";
 // add implementation that calculates total expenses per trip
 
 const TripEnum = {
-  name: 'trip type',
-  values: ['vacation', 'business', 'other']
-}
+  name: "trip type",
+  values: ["vacation", "business", "other"],
+};
 
 const TransportEnum = {
-  name: 'transport mode',
-  values: ['air', 'road', 'rail', 'water', 'other']
-}
+  name: "transport mode",
+  values: ["air", "road", "rail", "water", "other"],
+};
 
 const AccommodationEnum = {
-  name: 'accommodation type',
-  values: ['hotel', 'guesthouse', 'airbnb', 'resort', 'apartment', 'rental', 'other']
-}
+  name: "accommodation type",
+  values: ["hotel", "guesthouse", "airbnb", "resort", "apartment", "rental", "other"],
+};
 
 // create trip schema
 const tripSchema = new Schema(
@@ -32,30 +32,33 @@ const tripSchema = new Schema(
       required: [true, "Please enter starting location"],
     },
     destination: {
-      type: ['String'],
+      type: ["String"],
       required: [true, "Please enter destination(s)"],
     },
     tripType: {
       type: String,
       enum: {
         values: TripEnum.values,
-        message: generateEnumValidationMessage(TripEnum)
+        message: generateEnumValidationMessage(TripEnum),
       },
-      required: [true, "Please enter trip type"]
+      required: [true, "Please enter trip type"],
     },
     accommodationType: {
-      type: String, enum: {
+      type: String,
+      enum: {
         values: AccommodationEnum.values,
-        message: generateEnumValidationMessage(AccommodationEnum)
+        message: generateEnumValidationMessage(AccommodationEnum),
       },
-      required: [true, "Please enter accommodation type"] },
+      required: [true, "Please enter accommodation type"],
+    },
     transportMode: {
       type: String,
       enum: {
         values: TransportEnum.values,
-        message: generateEnumValidationMessage(TransportEnum)
+        message: generateEnumValidationMessage(TransportEnum),
       },
-      required: [true, "Please enter mode of transport"] },
+      required: [true, "Please enter mode of transport"],
+    },
     startDate: { type: Date, required: [true, "Please enter start date"] },
     endDate: { type: Date, required: [true, "Please enter end date"] },
     dateFlexibility: { type: Boolean, required: [true, "Please enter date flexibility"] },
@@ -63,7 +66,7 @@ const tripSchema = new Schema(
     userID: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: [true, "Please add the userID"] },
     createdAt: { type: Date, default: Date.now },
   },
-  { toJSON: { virtuals: true }, toObject: { virtuals: true } }
+  { toJSON: { virtuals: true }, toObject: { virtuals: true } },
 );
 
 // cascade delete expenses and itineraries when a trip is deleted

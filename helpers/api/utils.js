@@ -1,7 +1,7 @@
 /**
  * Validates the presence of specified fields in a request body object.
  * Throws an error if any of the required fields are missing.
- * 
+ *
  * @param {string[]} requiredFields - An array of field names that are required.
  * @param {Object} requestBody - The request body object to validate.
  * @throws {Error} Throws an error if any required field is missing in the request body.
@@ -9,15 +9,15 @@
 export function validateRequiredFields(requiredFields, requestBody) {
   // Input validation
   if (!isNotEmptyArray(requiredFields)) {
-    throw new Error('Required fields must be provided as an array and not empty');
+    throw new Error("Required fields must be provided as an array and not empty");
   }
-  if (typeof requestBody !== 'object' || requestBody === null) {
-    throw new Error('Request body must be provided as an object');
+  if (typeof requestBody !== "object" || requestBody === null) {
+    throw new Error("Request body must be provided as an object");
   }
 
   // Set to store keys of the request body object.
   const requestBodyKeys = new Set(Object.keys(requestBody));
-  
+
   // Array to store missing fields in the request body.
   const missingFields = [];
 
@@ -30,7 +30,7 @@ export function validateRequiredFields(requiredFields, requestBody) {
 
   // Throw an error if any required field is missing
   if (missingFields.length > 0) {
-    throw `Required fields missing in request body: ${missingFields.join(', ')}`;
+    throw `Required fields missing in request body: ${missingFields.join(", ")}`;
   }
 }
 
@@ -48,13 +48,13 @@ export const isNotEmptyArray = (arr) => Array.isArray(arr) && arr.length > 0;
  * @returns {string|object} - The trimmed string or object.
  */
 export const trim_string = (input) => {
-  if (typeof input === 'string') {
+  if (typeof input === "string") {
     return input.trim();
   }
-  if (input !== null && typeof input === 'object') {
+  if (input !== null && typeof input === "object") {
     Object.keys(input).forEach((key) => {
       input[key] = trim_string(input[key]);
     });
   }
   return input;
-}
+};
