@@ -1,9 +1,6 @@
+import LandingPage from "components/landingPage/LandingPage";
 import { useSession } from "next-auth/react";
 import Head from "next/head";
-import Link from "next/link";
-
-// TODO: stopped here
-// setup landing page
 
 export default function Home() {
   const { data: session, status } = useSession();
@@ -18,36 +15,7 @@ export default function Home() {
         <link href="/favicon.ico" rel="icon" />
       </Head>
       <main>
-        <h1>Welcome to the Trip Planner</h1>
-        <h2>Please login to continue</h2>
-        <p>
-          {session ? (
-            <>
-              <span>
-                <b>Welcome, {session.user.name}</b>
-              </span>
-            </>
-          ) : (
-            <>
-              <span>
-                <b>Please login to continue</b>
-              </span>
-            </>
-          )}
-        </p>
-        <p>
-          <Link href="/api/auth/signin">Login</Link>
-        </p>
-        <p>
-          <Link href="/api/auth/signout">Logout</Link>
-        </p>
-        <p>
-          <Link href="/api/auth/callback/credentials">Login with Credentials</Link>
-        </p>
-        <p>
-          <Link href="/api/auth/callback/credentials">Login with Credentials</Link>
-        </p>
-        <Link href="/api/auth/callback/credentials">Login with Credentials</Link>
+        <LandingPage />
       </main>
     </>
   );

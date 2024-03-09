@@ -1,7 +1,8 @@
 /* eslint-disable react/prop-types */
 import { SessionProvider } from "next-auth/react";
 
-import "@styles/global.scss";
+// import "@styles/global.scss";
+import "@styles/global.css";
 
 export default function App({ Component, pageProps: { session, ...pageProps } }) {
   return (
