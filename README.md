@@ -65,7 +65,7 @@ yarn run format
 ## Commit emojis
 🔥: new feature
 
-📦: package update/install
+📦: package update/install/uninstall
 
 🛠️: todo
 
