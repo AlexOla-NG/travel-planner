@@ -1,0 +1,129 @@
+@import "../../../styles/shared-styles.scss";
+
+/* Styling for Button component */
+$block-className: button;
+
+.#{$block-className} {
+  background-color: color(GoldenRod);
+  border-radius: to-rem(3);
+  color: color(White);
+  cursor: pointer;
+  font-size: to-rem(14);
+  font-weight: $font-weight-medium;
+  padding: to-rem(12 16);
+  text-align: center;
+  width: 100%;
+
+  svg path {
+    fill: currentColor;
+  }
+}
+
+.#{$block-className}Wrapper {
+  .#{$block-className} {
+    display: block;
+  }
+
+  button {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border: none;
+    text-align: center;
+    text-decoration: none;
+
+    &:active,
+    &:focus {
+      outline: none;
+    }
+
+    &:disabled {
+      background-color: color(DisabledVar1);
+      cursor: not-allowed;
+    }
+  }
+}
+
+.loading {
+  .#{$block-className} {
+    > svg {
+      background: none;
+      height: to-rem(20);
+      width: to-rem(20);
+    }
+  }
+}
+
+.success {
+  .#{$block-className} {
+    background-color: color(Success);
+  }
+}
+
+.primary {
+  .#{$block-className} {
+    background-color: color(PrimaryLight);
+    color: color(White);
+    font-weight: $font-weight-medium;
+    transition: all 0.3s ease-in-out;
+  }
+}
+
+.icon {
+  .#{$block-className} {
+    > * {
+      display: inline-block;
+      line-height: to-rem(15);
+      margin: 0 to-rem(4);
+      text-align: center;
+    }
+  }
+}
+
+.disabled {
+  .#{$block-className} {
+    background-color: color(DisabledVar1);
+    pointer-events: none; // remove click feature
+  }
+}
+
+.outline {
+  .#{$block-className} {
+    background-color: transparent;
+    border: to-rem(1) solid color(PrimaryLight);
+    color: color(PrimaryVarFive);
+    font-weight: $font-weight-medium;
+    transition: all 0.3s ease-in-out;
+
+    &:hover:enabled {
+      background-color: color(PrimaryLight);
+      color: color(White);
+    }
+  }
+
+  &Success {
+    composes: outline;
+
+    .#{$block-className} {
+      border: to-rem(1) solid color(Success);
+      color: color(Success);
+
+      &:hover:enabled {
+        background-color: color(Success);
+        color: color(White);
+      }
+    }
+  }
+
+  &.loading {
+    svg circle {
+      stroke: currentColor;
+    }
+
+    .#{$block-className}:hover {
+      svg circle {
+        stroke: color(White);
+      }
+    }
+  }
+}
