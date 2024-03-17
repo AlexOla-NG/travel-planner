@@ -219,3 +219,25 @@ export function filterByValue(value, array) {
  * @return {*} boolean
  */
 export const isObjectEmpty = (obj = {}) => !obj || Object.keys(obj).length === 0;
+
+/**
+ * Delete an array of keys from a given object
+ * @param {Object} targetObj Object to remove propeties from
+ * @param {Array} props Array of object properties to be deleted
+ * @returns {Object} A copy of the orginal object excluding the specified properties
+ */
+export const omit = (targetObj, props) => {
+  // Clone the targetObj to avoid mutating the original data
+  const obj = Object.assign({}, targetObj);
+
+  if (!Array.isArray(props)) {
+    console.error("[utils.omit] Keys to be omitted should be an array");
+    return;
+  }
+
+  props.forEach((prop) => {
+    Object.prototype.hasOwnProperty.call(obj, prop) && delete obj[prop];
+  });
+
+  return obj;
+};
