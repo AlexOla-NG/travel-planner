@@ -63,6 +63,7 @@ yarn run format
 ```
 
 ## Commit emojis
+
 🔥: new feature
 
 📦: package update/install/uninstall

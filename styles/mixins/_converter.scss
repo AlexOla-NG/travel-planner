@@ -25,9 +25,7 @@ $global-font-size: 100% !default;
 /// @returns {List} A list of converted values.
 @function to-rem($values, $base: null) {
   $rem-values: ();
-  $count: length(
-    $values
-  ); // If no base is defined, defer to the global font size
+  $count: length($values); // If no base is defined, defer to the global font size
 
   @if $base==null {
     $base: $global-font-size;
@@ -59,10 +57,7 @@ $global-font-size: 100% !default;
 
   @if ($count > 1) {
     @for $i from 1 through $count {
-      $value: nth(
-        $values,
-        $i
-      ); // Pixel and unitless values are converted to rems
+      $value: nth($values, $i); // Pixel and unitless values are converted to rems
 
       @if unit($value) == "px" or unitless($value) {
         $value: to-rem($value, $base: 16px);
