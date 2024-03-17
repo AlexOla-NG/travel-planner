@@ -13,7 +13,7 @@ body {
 }
 
 body {
-  background-color: color(White);
+  background-color: color(LightGray);
   color: $body-font-color;
   font-size: $body-font-size;
   text-rendering: optimizeLegibility;
@@ -48,6 +48,7 @@ a {
 // Reset images for responsive behavior
 img {
   max-width: 100%;
+  object-fit: contain;
 }
 
 // Set vertical alignment for svg elements

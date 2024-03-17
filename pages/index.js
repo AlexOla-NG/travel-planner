@@ -2,6 +2,8 @@ import LandingPage from "components/landingPage/LandingPage";
 import { useSession } from "next-auth/react";
 import Head from "next/head";
 
+import styles from "./index.module.scss";
+
 export default function Home() {
   const { data: session, status } = useSession();
 
@@ -14,7 +16,7 @@ export default function Home() {
         <meta content="width=device-width, initial-scale=1" name="viewport" />
         <link href="/favicon.ico" rel="icon" />
       </Head>
-      <main>
+      <main className={styles.main}>
         <LandingPage />
       </main>
     </>
