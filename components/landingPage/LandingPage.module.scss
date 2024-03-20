@@ -36,28 +36,6 @@
     .btnWrapper {
       display: flex;
       gap: 1rem;
-
-      .btn {
-        transition: background-color 0.3s linear;
-      }
-
-      .login {
-        background-color: color(NavyBlue);
-        color: color(White);
-
-        &:hover {
-          background-color: color(DarkerNavyBlue);
-        }
-      }
-
-      .signUp {
-        background-color: color(LemonYellow);
-        color: color(NavyBlue);
-
-        &:hover {
-          background-color: color(DarkerYellow);
-        }
-      }
     }
   }
 
