@@ -4,7 +4,6 @@
 $block-className: button;
 
 .#{$block-className} {
-  background-color: color(GoldenRod);
   border-radius: to-rem(3);
   color: color(White);
   cursor: pointer;
@@ -12,6 +11,7 @@ $block-className: button;
   font-weight: $font-weight-medium;
   padding: to-rem(12 16);
   text-align: center;
+  transition: all 0.3s linear;
   width: 100%;
 
   svg path {
@@ -62,10 +62,23 @@ $block-className: button;
 
 .primary {
   .#{$block-className} {
-    background-color: color(PrimaryLight);
+    background-color: color(NavyBlue);
     color: color(White);
-    font-weight: $font-weight-medium;
-    transition: all 0.3s ease-in-out;
+
+    &:hover {
+      background-color: color(DarkerNavyBlue);
+    }
+  }
+}
+
+.secondaryLemonYellow {
+  .#{$block-className} {
+    background-color: color(LemonYellow);
+    color: color(NavyBlue);
+
+    &:hover {
+      background-color: color(DarkerYellow);
+    }
   }
 }
 

@@ -8,9 +8,7 @@ export default {
     outlineSuccess: "outlineSuccess",
     icon: "icon",
     disabled: "disabled",
-    bottomFix: "bottomFix",
-    bottomFix2: "bottomFix2",
     primary: "primary",
-    bigBottom: "bigBottom",
+    secondaryLemonYellow: "secondaryLemonYellow",
   },
 };
