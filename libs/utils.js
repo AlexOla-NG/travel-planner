@@ -241,3 +241,11 @@ export const omit = (targetObj, props) => {
 
   return obj;
 };
+
+/**
+ * Function that does nothing:
+ * Useful as a default value for an optional Component prop
+ * that's of type - function
+ * Or for stubbing function calls in Tests and Storybook Docs
+ */
+export const noOp = () => {};
