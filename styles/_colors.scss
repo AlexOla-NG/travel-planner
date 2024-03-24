@@ -1,17 +1,23 @@
 $palette: (
   // Primary
-  EmeraldGreen: #2e8b57,
+  NavyBlue: #182c61,
 
   // Secondary
   // Neutral
   DarkGray: #4d4d4d,
   LightGray: #f2f2f2,
   White: #fff,
-  // Red
-  Error: (#a0000b),
+
+  // status
+  // error
+  Error: #a0000b,
+  // success
+  EmeraldGreen: #2e8b57,
+  LightSeaGreen: #7fc7af,
+  ForestGreen: #236a45,
+
   // Accent Colors
   DarkerNavyBlue: #162044,
   DarkerYellow: #e8c04d,
-  LemonYellow: #ffe873,
-  NavyBlue: #182c61
+  LemonYellow: #ffe873
 );
