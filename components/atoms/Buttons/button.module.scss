@@ -56,7 +56,11 @@ $block-className: button;
 
 .success {
   .#{$block-className} {
-    background-color: color(Success);
+    background-color: color(EmeraldGreen);
+
+    &:hover {
+      background-color: color(ForestGreen);
+    }
   }
 }
 
@@ -78,6 +82,22 @@ $block-className: button;
 
     &:hover {
       background-color: color(DarkerYellow);
+    }
+  }
+}
+
+.text {
+  .#{$block-className} {
+    background: none;
+    color: color(NavyBlue);
+    padding: unset;
+    width: unset;
+    margin: 0 auto;
+
+    &:hover {
+      box-shadow: 0 2px 0 0 color(DarkerNavyBlue);
+      border-radius: unset;
+      color: color(DarkerNavyBlue);
     }
   }
 }
@@ -111,20 +131,6 @@ $block-className: button;
     &:hover:enabled {
       background-color: color(PrimaryLight);
       color: color(White);
-    }
-  }
-
-  &Success {
-    composes: outline;
-
-    .#{$block-className} {
-      border: to-rem(1) solid color(Success);
-      color: color(Success);
-
-      &:hover:enabled {
-        background-color: color(Success);
-        color: color(White);
-      }
     }
   }
 

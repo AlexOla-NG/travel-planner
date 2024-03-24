@@ -10,5 +10,6 @@ export default {
     disabled: "disabled",
     primary: "primary",
     secondaryLemonYellow: "secondaryLemonYellow",
+    text: "text",
   },
 };
