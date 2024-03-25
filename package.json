@@ -29,7 +29,8 @@
     "react-dom": "^18",
     "react-spinners": "^0.13.8",
     "sass": "^1.71.1",
-    "yup": "^1.4.0"
+    "yup": "^1.4.0",
+    "yup-password": "^0.3.0"
   },
   "devDependencies": {
     "@next/eslint-plugin-next": "^14.1.0",
