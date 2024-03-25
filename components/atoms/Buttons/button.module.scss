@@ -33,20 +33,26 @@ $block-className: button;
     text-decoration: none;
 
     &:active,
-    &:focus {
+    &:focus,
+    &:focus-visible {
       outline: none;
     }
 
     &:disabled {
-      background-color: color(DisabledVar1);
+      background-color: color(DarkGray40A);
       cursor: not-allowed;
+
+      &:hover {
+        background-color: color(DarkGray40A);
+
+      }
     }
   }
 }
 
 .loading {
   .#{$block-className} {
-    > svg {
+    >svg {
       background: none;
       height: to-rem(20);
       width: to-rem(20);
@@ -104,7 +110,7 @@ $block-className: button;
 
 .icon {
   .#{$block-className} {
-    > * {
+    >* {
       display: inline-block;
       line-height: to-rem(15);
       margin: 0 to-rem(4);
@@ -115,8 +121,11 @@ $block-className: button;
 
 .disabled {
   .#{$block-className} {
-    background-color: color(DisabledVar1);
-    pointer-events: none; // remove click feature
+    background-color: color(DarkGray40A);
+
+    &:hover {
+      background-color: color(DarkGray40A);
+    }
   }
 }
 
