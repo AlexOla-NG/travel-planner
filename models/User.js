@@ -20,8 +20,8 @@ const userSchema = new Schema(
     },
     phoneNumber: {
       type: String,
-      minLength: [7, "phoneNumber cannot be less than 7 characters"],
-      maxLength: [15, "phoneNumber cannot exceed 15 characters"],
+      minLength: [11, "phoneNumber cannot be less than 11 characters"],
+      maxLength: [14, "phoneNumber cannot exceed 14 characters"],
       required: [true, "Please add a phone number"],
     },
     password: { type: String, required: [true, "Please add a password"] },
