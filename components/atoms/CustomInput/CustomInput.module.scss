@@ -1,0 +1,59 @@
+@import "../../../styles/shared-styles";
+
+.customInputWrapper {
+  display: flex;
+  align-items: center;
+  width: 100%;
+
+  &__InputWrapper {
+    border-radius: to-rem(5);
+    border: to-rem(1) solid color(DarkGray);
+    color: color(DarkGray);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: to-rem(48);
+    padding: to-rem(10 5);
+    width: 100%;
+
+    input:-webkit-autofill,
+    input:-webkit-autofill:hover,
+    input:-webkit-autofill:focus,
+    input:-webkit-autofill:active {
+      -webkit-box-shadow: 0 0 0 to-rem(30) color(LightGray) inset !important;
+    }
+
+    &__Input {
+      background-color: color(LightGray);
+      border: none;
+      border-radius: inherit;
+      height: 100%;
+      outline: none;
+      width: 100%;
+
+      &:focus {
+        outline: none;
+        border: none;
+        height: 100%;
+        width: 100%;
+      }
+    }
+
+    .pointer {
+      cursor: pointer;
+    }
+  }
+
+  &__InputDisabled {
+    background-color: color(DarkGray);
+    cursor: not-allowed;
+  }
+
+  &__InputEnabled {
+    background-color: color(LightGray);
+  }
+
+  &__InputError {
+    border: to-rem(1) solid #a0000b !important;
+  }
+}
