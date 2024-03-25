@@ -17,21 +17,6 @@
   }
 }
 
-#nprogress .bar {
-  background: #ed017f !important;
-}
-
-#nprogress .peg {
-  box-shadow:
-    0 0 0.625rem #ed017f,
-    0 0 0.313rem #ed017f !important;
-}
-
-#nprogress .spinner-icon {
-  border-top-color: #ed017f !important;
-  border-left-color: #ed017f !important;
-}
-
 @keyframes spin {
   to {
     transform: rotate(360deg);
