@@ -1,0 +1,8 @@
+@import "../../../styles/shared-styles";
+.errorMessageContainer {
+  color: color(Error);
+  width: 90%;
+  font-size: to-rem(12);
+  margin-top: to-rem(2);
+  text-align: left;
+}
