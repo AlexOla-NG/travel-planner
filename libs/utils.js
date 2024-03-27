@@ -37,7 +37,6 @@ export const NotificationTypes = {
   ERROR: "error",
   INFO: "info",
   WARN: "warn",
-  UPLOAD: "upload",
 };
 
 /**
