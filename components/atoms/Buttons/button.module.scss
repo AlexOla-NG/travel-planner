@@ -44,7 +44,6 @@ $block-className: button;
 
       &:hover {
         background-color: color(DarkGray40A);
-
       }
     }
   }
@@ -52,7 +51,7 @@ $block-className: button;
 
 .loading {
   .#{$block-className} {
-    >svg {
+    > svg {
       background: none;
       height: to-rem(20);
       width: to-rem(20);
@@ -110,7 +109,7 @@ $block-className: button;
 
 .icon {
   .#{$block-className} {
-    >* {
+    > * {
       display: inline-block;
       line-height: to-rem(15);
       margin: 0 to-rem(4);
