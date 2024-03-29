@@ -1,5 +1,5 @@
-import { deleteUser, getUserById, updateUser } from "@/controllers/user";
-import { apiHandler } from "@/helpers/api/apiHandler";
+import { deleteUser, getUserById, updateUser } from "api/controllers/user";
+import { apiHandler } from "helpers/api/apiHandler";
 
 export default apiHandler({
   get: getUser,

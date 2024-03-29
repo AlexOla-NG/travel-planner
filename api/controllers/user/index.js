@@ -1,7 +1,7 @@
-import advancedResults from "@/helpers/api/advancedResults";
-import { validateRequiredFields } from "@/helpers/api/utils";
-import User from "@/models/User";
+import User from "api/models/User";
 import bcrypt from "bcrypt";
+import advancedResults from "helpers/api/advancedResults";
+import { validateRequiredFields } from "helpers/api/utils";
 
 /**
  * Retrieves all users from the database.
@@ -48,7 +48,7 @@ export async function createNewUser(req, res) {
 
   // check if email already exists
   const user = await User.findOne({ email });
-  if (user) throw "Email is already in use";
+  if (user) throw "User with email already exists";
 
   // create new user
   const hashedPassword = await bcrypt.hash(password, 10);

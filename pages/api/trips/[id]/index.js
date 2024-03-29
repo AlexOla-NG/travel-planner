@@ -1,5 +1,5 @@
-import { deleteTrip, getTripById, updateTrip } from "@/controllers/trips";
-import { apiHandler } from "@/helpers/api/apiHandler";
+import { deleteTrip, getTripById, updateTrip } from "api/controllers/trips";
+import { apiHandler } from "helpers/api/apiHandler";
 
 export default apiHandler({
   get: getTrip,

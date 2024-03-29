@@ -1,4 +1,5 @@
-import { connectMongoDB } from "@/libs/mongodb";
+import { connectMongoDB } from "libs/mongodb";
+
 import { errorHandler } from "./errorHandler";
 import { trim_string } from "./utils";
 

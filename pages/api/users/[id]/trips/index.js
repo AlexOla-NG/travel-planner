@@ -1,5 +1,5 @@
-import { getUserTrips } from "@/controllers/trips";
-import { apiHandler } from "@/helpers/api/apiHandler";
+import { getUserTrips } from "api/controllers/trips";
+import { apiHandler } from "helpers/api/apiHandler";
 
 export default apiHandler({
   get: getTrips,

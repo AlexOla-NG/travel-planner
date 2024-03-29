@@ -1,5 +1,5 @@
-import { createExpense, getExpenses } from "@/controllers/expenses";
-import { apiHandler } from "@/helpers/api/apiHandler";
+import { createExpense, getExpenses } from "api/controllers/expenses";
+import { apiHandler } from "helpers/api/apiHandler";
 
 export default apiHandler({
   get: getAllExpenses,

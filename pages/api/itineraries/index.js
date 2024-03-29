@@ -1,5 +1,5 @@
-import { createItinerary, getItineraries } from "@/controllers/itinerary";
-import { apiHandler } from "@/helpers/api/apiHandler";
+import { createItinerary, getItineraries } from "api/controllers/itinerary";
+import { apiHandler } from "helpers/api/apiHandler";
 
 export default apiHandler({
   get: getAllItineraries,

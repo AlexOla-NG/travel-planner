@@ -1,5 +1,5 @@
-import { deleteExpenseById, getExpenseById, updateExpenseById } from "@/controllers/expenses";
-import { apiHandler } from "@/helpers/api/apiHandler";
+import { deleteExpenseById, getExpenseById, updateExpenseById } from "api/controllers/expenses";
+import { apiHandler } from "helpers/api/apiHandler";
 
 export default apiHandler({
   get: getExpense,

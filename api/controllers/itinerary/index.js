@@ -1,7 +1,7 @@
-import advancedResults from "@/helpers/api/advancedResults";
-import { validateRequiredFields } from "@/helpers/api/utils";
-import Itinerary from "@/models/Itineraries";
-import Trip from "@/models/Trip";
+import Itinerary from "api/models/Itineraries";
+import Trip from "api/models/Trip";
+import advancedResults from "helpers/api/advancedResults";
+import { validateRequiredFields } from "helpers/api/utils";
 
 /**
  * Creates a new itinerary.

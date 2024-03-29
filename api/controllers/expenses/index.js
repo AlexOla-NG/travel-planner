@@ -1,7 +1,7 @@
-import advancedResults from "@/helpers/api/advancedResults";
-import { validateRequiredFields } from "@/helpers/api/utils";
-import Expenses from "@/models/Expenses";
-import Trip from "@/models/Trip";
+import Expenses from "api/models/Expenses";
+import Trip from "api/models/Trip";
+import advancedResults from "helpers/api/advancedResults";
+import { validateRequiredFields } from "helpers/api/utils";
 
 /**
  * Creates a new expense based on the provided request data.

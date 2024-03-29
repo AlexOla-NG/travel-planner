@@ -1,5 +1,5 @@
-import { deleteItinerary, getItineraryById, updateItinerary } from "@/controllers/itinerary";
-import { apiHandler } from "@/helpers/api/apiHandler";
+import { deleteItinerary, getItineraryById, updateItinerary } from "api/controllers/itinerary";
+import { apiHandler } from "helpers/api/apiHandler";
 
 export default apiHandler({
   get: getItinerary,

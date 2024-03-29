@@ -1,5 +1,5 @@
-import { getUsers, createNewUser } from "@/controllers/user";
-import { apiHandler } from "@/helpers/api/apiHandler";
+import { createNewUser, getUsers } from "api/controllers/user";
+import { apiHandler } from "helpers/api/apiHandler";
 
 export default apiHandler({
   get: getAllUsers,

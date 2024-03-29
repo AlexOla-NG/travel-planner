@@ -1,7 +1,7 @@
-import advancedResults from "@/helpers/api/advancedResults";
-import { validateRequiredFields } from "@/helpers/api/utils";
-import Trip from "@/models/Trip";
-import User from "@/models/User";
+import Trip from "api/models/Trip";
+import User from "api/models/User";
+import advancedResults from "helpers/api/advancedResults";
+import { validateRequiredFields } from "helpers/api/utils";
 
 /**
  * Creates a new trip based on the provided request data.
