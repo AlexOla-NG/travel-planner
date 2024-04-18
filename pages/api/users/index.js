@@ -1,17 +1,8 @@
-import { createNewUser, getUsers } from "api/controllers/user";
+import { getUsers } from "api/controllers/user";
 import { apiHandler } from "helpers/api/apiHandler";
 
 export default apiHandler({
-  get: getAllUsers,
-  post: createUser,
+  get: async (req, res) => {
+    await getUsers(req, res);
+  },
 });
-
-// get all users
-async function getAllUsers(req, res) {
-  await getUsers(req, res);
-}
-
-// create user
-async function createUser(req, res) {
-  await createNewUser(req, res);
-}
