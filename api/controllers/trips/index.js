@@ -1,7 +1,7 @@
 import Trip from "api/models/Trip";
 import User from "api/models/User";
 import advancedResults from "helpers/api/advancedResults";
-import { validateRequiredFields } from "helpers/api/utils";
+import { trim_string, validateRequiredFields } from "helpers/api/utils";
 
 /**
  * Creates a new trip based on the provided request data.
@@ -12,6 +12,8 @@ import { validateRequiredFields } from "helpers/api/utils";
  * @returns {Object} JSON response with a success message and the created trip data.
  */
 export async function createTrip(req, res) {
+  req.body = trim_string(req.body);
+
   // Extract trip details from the request body
   const { name, startingLocation, destination, tripType, accommodationType, transportMode, startDate, endDate, dateFlexibility, userID, notes } = req.body;
 
@@ -101,6 +103,8 @@ export async function getUserTrips(req, res) {
  * @returns {Object} JSON response with a success message and the updated trip data.
  */
 export async function updateTrip(req, res) {
+  req.body = trim_string(req.body);
+
   // Retrieve and update the trip based on the provided ID and request body
   const trip = await Trip.findByIdAndUpdate(req.query.id, req.body, {
     new: true, // ensures the trip returned is the updated one

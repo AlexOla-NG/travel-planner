@@ -1,7 +1,7 @@
 import Expenses from "api/models/Expenses";
 import Trip from "api/models/Trip";
 import advancedResults from "helpers/api/advancedResults";
-import { validateRequiredFields } from "helpers/api/utils";
+import { trim_string, validateRequiredFields } from "helpers/api/utils";
 
 /**
  * Creates a new expense based on the provided request data.
@@ -12,6 +12,8 @@ import { validateRequiredFields } from "helpers/api/utils";
  * @returns {Object} JSON response with a success message and the created expense data.
  */
 export const createExpense = async (req, res) => {
+  req.body = trim_string(req.body);
+
   const { category, amount, date, tripID } = req.body;
 
   // Check if all compulsory fields are not empty
@@ -73,6 +75,8 @@ export const getExpenseById = async (req, res) => {
  * @returns {Object} JSON response with a success message and the updated expense data.
  */
 export const updateExpenseById = async (req, res) => {
+  req.body = trim_string(req.body);
+
   // Retrieve and update the expense based on the provided ID and request body
   const expense = await Expenses.findByIdAndUpdate(req.query.id, req.body, { new: true, runValidators: true });
 

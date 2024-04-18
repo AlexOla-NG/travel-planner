@@ -1,7 +1,7 @@
 import Itinerary from "api/models/Itineraries";
 import Trip from "api/models/Trip";
 import advancedResults from "helpers/api/advancedResults";
-import { validateRequiredFields } from "helpers/api/utils";
+import { trim_string, validateRequiredFields } from "helpers/api/utils";
 
 /**
  * Creates a new itinerary.
@@ -12,6 +12,8 @@ import { validateRequiredFields } from "helpers/api/utils";
  * @returns {Promise<void>} JSON response with a success message and the created itinerary data.
  */
 export async function createItinerary(req, res) {
+  req.body = trim_string(req.body);
+
   // Extract itinerary details from the request body
   const { activity, startTime, endTime, tripID, notes } = req.body;
 
@@ -77,6 +79,8 @@ export async function getItineraryById(req, res) {
  * @returns {Promise<void>} JSON response with a success message and the updated itinerary data.
  */
 export async function updateItinerary(req, res) {
+  req.body = trim_string(req.body);
+
   // Retrieve and update the itinerary based on the provided ID and request body
   const itinerary = await Itinerary.findByIdAndUpdate(req.query.id, req.body, {
     new: true, // ensures the itinerary returned is the updated one

@@ -1,7 +1,6 @@
 import { connectMongoDB } from "libs/mongodb";
 
 import { errorHandler } from "./errorHandler";
-import { trim_string } from "./utils";
 
 export { apiHandler };
 
@@ -18,12 +17,6 @@ function apiHandler(handler) {
     if (!handler[method]) return res.status(405).end(`Method ${req.method} Not Allowed`);
 
     try {
-      // remove whitespace from req.body values
-      if (method === "post" || method === "put") {
-        req.body = trim_string(req.body);
-        await handler[method](req, res);
-      }
-
       // route handler
       await handler[method](req, res);
     } catch (err) {
