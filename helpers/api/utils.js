@@ -1,3 +1,5 @@
+import jwt from "jsonwebtoken";
+
 /**
  * Validates the presence of specified fields in a request body object.
  * Throws an error if any of the required fields are missing.
@@ -57,4 +59,44 @@ export const trim_string = (input) => {
     });
   }
   return input;
+};
+
+/**
+ * Generates a token for the given user.
+ * @param {User} user - The user for whom the reset token should be generated.
+ * @param {string} duration - When should the token expire.
+ * @returns {string} The generated reset token.
+ */
+export const generateToken = (user, duration = "1d") => {
+  return jwt.sign(
+    {
+      email: user.email,
+      id: user.id,
+    },
+    process.env.JWT_SECRET,
+    {
+      expiresIn: duration,
+    },
+  );
+};
+
+/**
+ * Verifies the provided reset token.
+ * @param {string} Token - The token to be verified.
+ * @returns {Promise<boolean>} `true` if the token is valid, `false` otherwise.
+ */
+export const verifyToken = async (token) => {
+  return new Promise((resolve) => {
+    jwt.verify(token, process.env.JWT_SECRET, async (err, decoded) => {
+      if (err) {
+        resolve(false);
+      } else {
+        try {
+          resolve(decoded.email);
+        } catch (error) {
+          resolve(false);
+        }
+      }
+    });
+  });
 };
