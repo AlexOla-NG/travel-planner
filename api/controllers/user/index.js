@@ -1,7 +1,6 @@
 import User from "api/models/User";
-import bcrypt from "bcrypt";
 import advancedResults from "helpers/api/advancedResults";
-import { validateRequiredFields } from "helpers/api/utils";
+import { trim_string } from "helpers/api/utils";
 
 /**
  * Retrieves all users from the database.
@@ -32,32 +31,6 @@ export async function getUserById(req, res) {
 }
 
 /**
- * Creates a new user and stores it in the database.
- *
- * @param {Object} req - NextRequest object.
- * @param {Object} res - NextResponse object.
- * @returns {Promise<void>} A Promise that resolves to a JSON response confirming the successful user creation.
- * @throws {string} Throws an error if any required fields are missing or if the provided email is already in use.
- */
-export async function createNewUser(req, res) {
-  const { firstName, lastName, email, password, phoneNumber } = req.body;
-
-  // Check if all compulsory fields are not empty
-  let compulsoryFields = ["firstName", "lastName", "email", "password", "phoneNumber"];
-  validateRequiredFields(compulsoryFields, req.body);
-
-  // check if email already exists
-  const user = await User.findOne({ email });
-  if (user) throw "User with email already exists";
-
-  // create new user
-  const hashedPassword = await bcrypt.hash(password, 10);
-  const data = await User.create({ firstName, lastName, email, password: hashedPassword, phoneNumber });
-
-  return res.status(201).json({ message: "User created successfully", data });
-}
-
-/**
  * Updates a user's information in the database.
  *
  * @param {Object} req - NextRequest object.
@@ -66,6 +39,8 @@ export async function createNewUser(req, res) {
  * @throws {string} Throws an error if the user with the specified ID is not found.
  */
 export async function updateUser(req, res) {
+  req.body = trim_string(req.body);
+
   const user = await User.findByIdAndUpdate(req.query.id, req.body, {
     new: true, // ensures user returned is the updated one
     runValidators: true,
