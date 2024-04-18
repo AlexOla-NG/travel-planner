@@ -1,6 +1,5 @@
 import Button from "components/atoms/Buttons/Button";
 import constants from "components/constants";
-import { signIn } from "next-auth/react";
 import Image from "next/image";
 
 import heroImg from "../../public/images/hero-image.avif";
@@ -11,7 +10,6 @@ export default function LandingPage() {
 
   const handleClick = (e) => {
     e.preventDefault();
-    signIn();
   };
 
   return (
@@ -22,10 +20,10 @@ export default function LandingPage() {
           <p>The all-in-one travel planner app. Effortlessly organize your trips, discover new destinations, and share your experiences with friends.</p>
         </div>
         <div className={styles.btnWrapper}>
-          <Button link="/api/auth/signin" onClick={handleClick} variants={buttonVariants.primary}>
+          <Button link="#" onClick={handleClick} variants={buttonVariants.primary}>
             Login
           </Button>
-          <Button link="/auth/signup" variants={buttonVariants.secondaryLemonYellow}>
+          <Button link="#" variants={buttonVariants.secondaryLemonYellow}>
             Sign Up
           </Button>
         </div>
