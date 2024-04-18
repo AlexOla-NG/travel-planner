@@ -26,6 +26,7 @@ const userSchema = new Schema(
     },
     password: { type: String, required: [true, "Please add a password"] },
     contacts: [{ type: Schema.Types.ObjectId, ref: "Contact" }],
+    resetToken: String,
     createdAt: { type: Date, default: Date.now },
   },
   { toJSON: { virtuals: true }, toObject: { virtuals: true } },
