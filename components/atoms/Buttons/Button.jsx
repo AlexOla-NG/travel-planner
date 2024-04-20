@@ -3,20 +3,11 @@ import { composeClasses, omit } from "libs/utils";
 import Link from "next/link";
 import PropTypes from "prop-types";
 import React from "react";
-import { ScaleLoader } from "react-spinners";
 
 import styles from "./button.module.scss";
 
 const { buttonVariants } = constants;
 const propsToOmit = ["variants", "className", "wrapperClassName", "link", "loading"];
-
-/**
- * Renders the actual content of the Button
- * @param {Object} children Render Data
- * @param {boolean} loading Loading state
- * @return {React.Component} Button component
- */
-const renderContent = (children, loading) => <div>{loading ? <ScaleLoader /> : children}</div>;
 
 /**
  * @param {Object} props Object props
@@ -39,11 +30,11 @@ const Button = (props) => {
     <div className={className}>
       {link ? (
         <Link className={composeClasses(styles.button, buttonClass)} {...filteredProps} href={link}>
-          {renderContent(children, loading)}
+          {children}
         </Link>
       ) : (
         <button className={composeClasses(styles.button, buttonClass, disabled && styles.disabled)} {...filteredProps}>
-          {renderContent(children, loading)}
+          {children}
         </button>
       )}
     </div>
