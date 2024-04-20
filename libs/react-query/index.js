@@ -1,7 +1,7 @@
 import { QueryClient } from "@tanstack/react-query";
 import { showToast } from "components/atoms/ShowToast/showToast";
 
-import { NotificationTypes } from "./utils";
+import { NotificationTypes } from "../utils";
 
 /**
  * Handles errors and displays an error notification.
@@ -29,6 +29,7 @@ export const queryClient = new QueryClient({
       refetchOnMount: true,
       refetchOnReconnect: false,
       refetchOnWindowFocus: false,
+      retry: false,
     },
   },
 });
