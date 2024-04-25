@@ -1,7 +1,11 @@
+import constants from "api/constants";
 import User from "api/models/User";
 import bcrypt from "bcryptjs";
 import { generateToken, trim_string, validateRequiredFields, verifyToken } from "helpers/api/utils";
 import { nodemailerTransporter } from "libs/nodemailer";
+
+const { errors } = constants;
+const { doesNotExist, invalidDetails, alreadyExists } = errors;
 
 /**
  * Creates a new user and stores it in the database.
@@ -21,7 +25,9 @@ export async function createNewUser(req, res) {
 
   // check if email already exists
   const user = await User.findOne({ email });
-  if (user) throw "User with email already exists";
+  if (user) {
+    return res.status(400).json({ message: `User with email ${alreadyExists.message}`, code: alreadyExists.code });
+  }
 
   // create new user
   const hashedPassword = await bcrypt.hash(password, 10);
@@ -50,14 +56,14 @@ export async function loginUser(req, res) {
   const user = await User.findOne({ email });
 
   if (!user) {
-    return res.status(400).json({ message: "email does not exist" });
+    return res.status(400).json({ message: `Email ${doesNotExist.message}`, code: doesNotExist.code });
   }
 
   // check if password matches
   const isPasswordValid = await bcrypt.compare(password, user.password);
 
   if (!isPasswordValid) {
-    return res.status(400).json({ message: "Incorrect email or password" });
+    return res.status(400).json({ message: `Password or email is ${invalidDetails.message}`, code: invalidDetails.code });
   }
 
   // if email and password match, create JWT
@@ -76,7 +82,7 @@ export async function forgotUserPassword(req, res) {
   const user = await User.findOne({ email });
 
   if (!user) {
-    return res.status(400).json({ message: "email does not exist" });
+    return res.status(400).json({ message: `email ${doesNotExist.message}`, code: doesNotExist.code });
   }
 
   // generate a reset token
@@ -110,7 +116,7 @@ export async function resetUserPassword(req, res) {
   const isTokenValid = await verifyToken(token);
   const user = await User.findOne({ resetToken: token });
   if (!isTokenValid || !user) {
-    return res.status(400).json({ message: "Invalid or expired token" });
+    return res.status(400).json({ message: `Token is ${invalidDetails.message}`, code: invalidDetails.code });
   }
 
   // hash the new password
