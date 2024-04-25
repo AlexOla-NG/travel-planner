@@ -51,10 +51,11 @@ $block-className: button;
 
 .loading {
   .#{$block-className} {
-    > svg {
-      background: none;
-      height: to-rem(20);
-      width: to-rem(20);
+    background-color: color(DarkGray40A) !important;
+    cursor: not-allowed;
+
+    &:hover {
+      background-color: color(DarkGray40A) !important;
     }
   }
 }
