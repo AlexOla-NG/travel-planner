@@ -2,7 +2,7 @@ import Button from "components/atoms/Buttons/Button";
 import FormikCustomInput from "components/atoms/FormikCustomInput/FormikCustomInput";
 import constants from "components/constants";
 import { Form, Formik } from "formik";
-import { useCreateUser } from "hooks/user";
+import { useCreateUser } from "hooks/auth";
 import { useRouter } from "next/router";
 import React from "react";
 
@@ -10,20 +10,23 @@ import { fieldValues, initialState } from "./data";
 import { signupSchema } from "./schema";
 import styles from "./signup.module.scss";
 
+const { buttonVariants, routes } = constants;
+const { login } = routes;
+
 const SignUp = () => {
   const router = useRouter();
-  const { mutate, isPending } = useCreateUser();
-  const { buttonVariants } = constants;
+  const { createUser, isPending } = useCreateUser();
 
   const handleSubmit = async (values, { resetForm }) => {
-    mutate(values, {
-      onSuccess: () => {
-        resetForm();
-        setTimeout(() => {
-          router.push("/api/auth/signin");
-        }, 3000);
-      },
-    });
+    !isPending &&
+      createUser(values, {
+        onSuccess: () => {
+          resetForm();
+          setTimeout(() => {
+            router.push(login);
+          }, 3000);
+        },
+      });
   };
   return (
     <main className={styles.signup}>
@@ -45,14 +48,16 @@ const SignUp = () => {
                   );
                 })}
                 <Button disabled={!isFormValid} loading={isPending} variants={[buttonVariants.success]} wrapperClassName={styles.signupBtn}>
-                  Create an account
+                  {isPending ? "Creating your account..." : "Create an account"}
                 </Button>
               </Form>
             );
           }}
         </Formik>
 
-        <Button variants={[buttonVariants.text]}>I already have an account</Button>
+        <Button link={login} variants={[buttonVariants.text]} wrapperClassName={styles.loginBtn}>
+          I already have an account
+        </Button>
       </section>
 
       <p className={styles.termsAndConditions}>

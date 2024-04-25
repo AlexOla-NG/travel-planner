@@ -1,1 +1,1 @@
-export { default } from "components/auth/SignUp/Index";
+export { default } from "components/auth/SignUp";
