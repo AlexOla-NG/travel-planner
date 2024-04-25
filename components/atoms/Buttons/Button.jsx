@@ -14,7 +14,7 @@ const propsToOmit = ["variants", "className", "wrapperClassName", "link", "loadi
  * @returns {React.Component} Button component
  */
 const Button = (props) => {
-  const { children, className: buttonClass, disabled, loading, variants, link, wrapperClassName } = props;
+  const { children, className: buttonClass, disabled, loading, variants, link, wrapperClassName, type } = props;
 
   // compose variant classnames
   const variantClassName = Array.isArray(variants)
@@ -33,7 +33,7 @@ const Button = (props) => {
           {children}
         </Link>
       ) : (
-        <button className={composeClasses(styles.button, buttonClass, disabled && styles.disabled)} {...filteredProps}>
+        <button className={composeClasses(styles.button, buttonClass, disabled && styles.disabled)} {...filteredProps} type={type}>
           {children}
         </button>
       )}
@@ -48,6 +48,7 @@ Button.defaultProps = {
   link: "",
   variants: null,
   disabled: false,
+  type: "submit",
 };
 
 const buttonTypes = PropTypes.oneOf(Object.values(buttonVariants));
@@ -59,6 +60,7 @@ Button.propTypes = {
   loading: PropTypes.bool,
   link: PropTypes.string,
   variants: PropTypes.oneOfType([buttonTypes, PropTypes.arrayOf(PropTypes.string)]),
+  type: PropTypes.oneOf(["submit", "button"]),
 };
 
 export default Button;
