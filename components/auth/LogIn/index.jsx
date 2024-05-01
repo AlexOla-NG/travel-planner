@@ -13,9 +13,6 @@ import { loginSchema } from "./schema";
 const { buttonVariants, routes } = constants;
 const { forgotPassword, signup, home } = routes;
 
-// TODO: stopped here
-// test that page works
-
 const Login = () => {
   const router = useRouter();
   const { loginUser, isPending } = useLoginUser();
