@@ -1,3 +1,7 @@
+import constants from "api/constants";
+
+const { errors } = constants;
+
 /**
  * The different constants/types used for managing component/app related properties
  */
@@ -18,5 +22,13 @@ export default {
     signup: "/auth/signup",
     forgotPassword: "/auth/forgot-password",
     resetPassword: "/auth/reset-password",
+  },
+  errors: {
+    [errors.alreadyExists.code]: "Email already in use",
+    [errors.doesNotExist.code]: "Email does not exist",
+    [errors.invalidDetails.code]: "Invalid email or password",
+  },
+  localStorageKeys: {
+    user: "travel-planner-user",
   },
 };
