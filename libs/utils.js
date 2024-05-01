@@ -248,3 +248,19 @@ export const omit = (targetObj, props) => {
  * Or for stubbing function calls in Tests and Storybook Docs
  */
 export const noOp = () => {};
+
+/**
+ * Generates a query string from an object of key-value pairs.
+ *
+ * @param {Object} query - An object containing the query parameters.
+ * @returns {string} The formatted query string, or an empty string if the input object is empty.
+ *
+ * @example
+ * const queryObj = { page: 1, limit: 10, sortBy: 'name' };
+ * const queryString = getUrlQuery(queryObj); // Returns "?page=1&limit=10&sortBy=name"
+ */
+export const getUrlQuery = (query) => {
+  if (Object.keys(query).length > 0) {
+    return `?${Object.entries(query).map(([key, value]) => `${key}=${value}&`)}`.replaceAll(",", "").slice(0, -1);
+  } else return "";
+};
