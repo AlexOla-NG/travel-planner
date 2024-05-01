@@ -5,13 +5,10 @@ import Image from "next/image";
 import heroImg from "../../public/images/hero-image.avif";
 import styles from "./LandingPage.module.scss";
 
+const { buttonVariants, routes } = constants;
+const { login, signup } = routes;
+
 export default function LandingPage() {
-  const { buttonVariants } = constants;
-
-  const handleClick = (e) => {
-    e.preventDefault();
-  };
-
   return (
     <section className={styles.landingPage}>
       <div className={styles.textOnly}>
@@ -20,10 +17,10 @@ export default function LandingPage() {
           <p>The all-in-one travel planner app. Effortlessly organize your trips, discover new destinations, and share your experiences with friends.</p>
         </div>
         <div className={styles.btnWrapper}>
-          <Button link="#" onClick={handleClick} variants={buttonVariants.primary}>
+          <Button link={login} variants={buttonVariants.primary}>
             Login
           </Button>
-          <Button link="#" variants={buttonVariants.secondaryLemonYellow}>
+          <Button link={signup} variants={buttonVariants.secondaryLemonYellow}>
             Sign Up
           </Button>
         </div>
