@@ -22,6 +22,7 @@ export default {
     signup: "/auth/signup",
     forgotPassword: "/auth/forgot-password",
     resetPassword: "/auth/reset-password",
+    dashboard: "/dashboard",
   },
   errors: {
     [errors.alreadyExists.code]: "Email already in use",
