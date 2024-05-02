@@ -86,6 +86,9 @@ export const generateToken = (user, duration = "1d") => {
  * @returns {Promise<boolean>} `true` if the token is valid, `false` otherwise.
  */
 export const verifyToken = async (token) => {
+  if (!token) {
+    return false;
+  }
   return new Promise((resolve) => {
     jwt.verify(token, process.env.JWT_SECRET, async (err, decoded) => {
       if (err) {
