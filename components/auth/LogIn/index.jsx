@@ -3,7 +3,6 @@ import FormikCustomInput from "components/atoms/FormikCustomInput/FormikCustomIn
 import constants from "components/constants";
 import { Form, Formik } from "formik";
 import { useLoginUser } from "hooks/auth";
-import { useRouter } from "next/router";
 import React from "react";
 
 import { fieldValues, initialState } from "./data";
@@ -11,10 +10,9 @@ import styles from "./index.module.scss";
 import { loginSchema } from "./schema";
 
 const { buttonVariants, routes } = constants;
-const { forgotPassword, signup, home } = routes;
+const { forgotPassword, signup } = routes;
 
 const Login = () => {
-  const router = useRouter();
   const { loginUser, isPending } = useLoginUser();
 
   const handleSubmit = async (values, { resetForm }) => {
@@ -22,9 +20,6 @@ const Login = () => {
       loginUser(values, {
         onSuccess: () => {
           resetForm();
-          setTimeout(() => {
-            router.push(home);
-          }, 3000);
         },
       });
   };
