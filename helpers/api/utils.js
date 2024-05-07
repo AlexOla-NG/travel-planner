@@ -1,4 +1,4 @@
-import jwt from "jsonwebtoken";
+import { SignJWT, jwtVerify } from "jose";
 
 /**
  * Validates the presence of specified fields in a request body object.
@@ -67,17 +67,20 @@ export const trim_string = (input) => {
  * @param {string} duration - When should the token expire.
  * @returns {string} The generated reset token.
  */
-export const generateToken = (user, duration = "1d") => {
-  return jwt.sign(
-    {
-      email: user.email,
-      id: user.id,
-    },
-    process.env.JWT_SECRET,
-    {
-      expiresIn: duration,
-    },
-  );
+export const generateToken = async (user, duration = "1d") => {
+  const alg = "HS256";
+
+  try {
+    const jwt = await new SignJWT({ email: user.email, id: user.id })
+      .setProtectedHeader({ alg })
+      .setExpirationTime(duration)
+      .sign(new TextEncoder().encode(process.env.JWT_SECRET));
+
+    return jwt;
+  } catch (err) {
+    console.error("Error generating token:", err);
+    throw err;
+  }
 };
 
 /**
@@ -89,17 +92,11 @@ export const verifyToken = async (token) => {
   if (!token) {
     return false;
   }
-  return new Promise((resolve) => {
-    jwt.verify(token, process.env.JWT_SECRET, async (err, decoded) => {
-      if (err) {
-        resolve(false);
-      } else {
-        try {
-          resolve(decoded.email);
-        } catch (error) {
-          resolve(false);
-        }
-      }
-    });
-  });
+  try {
+    const { payload } = await jwtVerify(token, new TextEncoder().encode(process.env.JWT_SECRET));
+    return payload.email;
+  } catch (err) {
+    console.error("Error verifying token:", err);
+    return false;
+  }
 };

@@ -67,7 +67,7 @@ export async function loginUser(req, res) {
   }
 
   // if email and password match, create JWT
-  const token = generateToken(user, "5d");
+  const token = await generateToken(user, "5d");
 
   return res.json({ data: { id: user._id, token, name: user.fullName, email: user.email }, message: "success" });
 }
@@ -86,7 +86,7 @@ export async function forgotUserPassword(req, res) {
   }
 
   // generate a reset token
-  const resetToken = generateToken(user);
+  const resetToken = await generateToken(user);
   await User.findOneAndUpdate({ email: user.email }, { resetToken });
 
   // send reset link
@@ -115,6 +115,7 @@ export async function resetUserPassword(req, res) {
   // verify token
   const isTokenValid = await verifyToken(token);
   const user = await User.findOne({ resetToken: token });
+
   if (!isTokenValid || !user) {
     return res.status(400).json({ message: `Token is ${invalidDetails.message}`, code: invalidDetails.code });
   }
