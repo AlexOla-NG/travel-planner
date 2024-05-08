@@ -18,5 +18,10 @@ export default {
       code: "invalid_details",
       description: "the resource is invalid or incorrect",
     },
+    authFailed: {
+      message: "authentication failed",
+      code: "auth_failed",
+      description: "the user isn't authenticated",
+    },
   },
 };

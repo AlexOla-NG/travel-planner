@@ -28,6 +28,7 @@ export default {
     [errors.alreadyExists.code]: "Email already in use",
     [errors.doesNotExist.code]: "Email does not exist",
     [errors.invalidDetails.code]: "Invalid email or password",
+    [errors.authFailed.code]: "Authentication failed",
   },
   localStorageKeys: {
     user: "travel-planner-user",
