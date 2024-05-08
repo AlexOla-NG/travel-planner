@@ -1,11 +1,13 @@
 import { useMutation } from "@tanstack/react-query";
-import constants from "api/constants";
 import { showToast } from "components/atoms/ShowToast/showToast";
+import constants from "components/constants";
+import { useLocalStorage } from "hooks/local-storage";
 import queryKeys from "libs/react-query/queryKeys";
-import { NotificationTypes } from "libs/utils";
+import { NotificationTypes, getUrlQuery } from "libs/utils";
+import { useRouter } from "next/router";
 import { createUser, forgotPassword, loginUser, resetPassword } from "services/auth";
 
-const { errors } = constants;
+const { errors, localStorageKeys, routes } = constants;
 
 export const useCreateUser = (data) => {
   const { mutate, isPending } = useMutation({
@@ -20,11 +22,8 @@ export const useCreateUser = (data) => {
           data: { code },
         },
       } = err;
-      const errorMessageMap = {
-        [errors.alreadyExists.code]: "Email already in use",
-      };
 
-      const errMsg = errorMessageMap[code] || "Failed to create your account. Please try again later or contact support if the issue persists.";
+      const errMsg = errors[code] || "Failed to create your account. Please try again later or contact support if the issue persists.";
 
       showToast(errMsg, NotificationTypes.ERROR);
     },
@@ -34,11 +33,28 @@ export const useCreateUser = (data) => {
 };
 
 export const useLoginUser = (data) => {
+  const router = useRouter();
+  const { setItem } = useLocalStorage();
+  const { dashboard } = routes;
+
   const { mutate, isPending } = useMutation({
     mutationKey: [queryKeys.loginUser, data],
     mutationFn: (data) => loginUser(data),
-    onSuccess: () => {
-      showToast("Login sucessful", NotificationTypes.SUCCESS);
+    onSuccess: (data) => {
+      // redirect to the destination page after login
+      const query = router.query;
+      const { rdr } = query;
+
+      delete query.rdr;
+
+      const loginDestination = `${rdr}${getUrlQuery(query)}`;
+
+      setItem(localStorageKeys.user, data);
+      showToast("Login successful", NotificationTypes.SUCCESS);
+
+      setTimeout(() => {
+        router.push(rdr ? loginDestination : dashboard);
+      }, 3000);
     },
     onError: (err) => {
       const {
@@ -46,12 +62,8 @@ export const useLoginUser = (data) => {
           data: { code },
         },
       } = err;
-      const errorMessageMap = {
-        [errors.doesNotExist.code]: "Email does not exist",
-        [errors.invalidDetails.code]: "Invalid email or password",
-      };
 
-      const errMsg = errorMessageMap[code] || "Failed to sign in. Please try again later or contact support if the issue persists.";
+      const errMsg = errors[code] || "Failed to sign in. Please try again later or contact support if the issue persists.";
 
       showToast(errMsg, NotificationTypes.ERROR);
     },
@@ -74,11 +86,7 @@ export const useForgotPassword = (data) => {
         },
       } = err;
 
-      const errorMessageMap = {
-        [errors.doesNotExist.code]: "Email does not exist",
-      };
-
-      const errMsg = errorMessageMap[code] || "An error occurred while resetting your password. Please try again later or contact support if the issue persists.";
+      const errMsg = errors[code] || "An error occurred while resetting your password. Please try again later or contact support if the issue persists.";
 
       showToast(errMsg, NotificationTypes.ERROR);
     },
@@ -100,11 +108,8 @@ export const useResetPassword = (data) => {
           data: { code },
         },
       } = err;
-      const errorMessageMap = {
-        [errors.invalidDetails.code]: "Invalid email or password",
-      };
 
-      const errMsg = errorMessageMap[code] || "Failed to reset your password. Please try again later or contact support if the issue persists.";
+      const errMsg = errors[code] || "Failed to reset your password. Please try again later or contact support if the issue persists.";
 
       showToast(errMsg, NotificationTypes.ERROR);
     },
